@@ -1,0 +1,5 @@
+{% for q in questions %}
+  <h3>{{ loop.index }}. {{ q.question }}</h3>
+  <ul>{% for o in q.options %}<li>{{ o }}</li>{% endfor %}</ul>
+  <small>{{ q.topic }} | {{ q.difficulty }} | {{ q.tied_to }}</small>
+{% endfor %}
