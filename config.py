@@ -1,4 +1,4 @@
 # Shared config: import from here, never hardcode
 CHROMA_PATH = "./chroma_db"
 COLLECTION_NAME = "question_bank"
-EMBED_MODEL = "all-MiniLM-L6-v2"
+EMBED_MODEL = "all-MiniLM-L6-v2"  # Chroma's default (ONNX); no custom embedding function needed

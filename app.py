@@ -1,24 +1,16 @@
-import os
-from dotenv import load_dotenv
-from groq import Groq
-from pypdf import PdfReader
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from utils import extract_text, generate_quiz
 
-app=Flask(__name__)
-load_dotenv()
+app = Flask(__name__)
 
-client =Groq(api_key=os.environ.get("GROQ_API_KEY"))
+@app.route("/", methods=["GET", "POST"])
+def index():
+    if request.method == "POST":
+        resume_text = extract_text(request.files["resume"])
+        jd_text = request.form["jd"]
+        questions = generate_quiz(resume_text, jd_text)
+        return render_template("quiz.html", questions=questions)
+    return render_template("index.html")
 
-reader=PdfReader('test.pdf')
-page=reader.pages[0]
-
-test=client.chat.completions.create(
-    model="openai/gpt-oss-120b",
-    messages=[{"role": "user","content": f" list all the projcets name in the resume: {page.extract_text()} add<br> tags for each project."}])
-
-@app.route('/')
-def welcome():
-    return render_template("home.html",projects=test.choices[0].message.content)
-
-if(__name__ == "__main__"):
+if __name__ == "__main__":
     app.run(debug=True)

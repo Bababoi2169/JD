@@ -1,7 +1,6 @@
 flask
 groq
 chromadb
-sentence-transformers
 pypdf
 python-docx
 python-dotenv
