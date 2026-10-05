@@ -1,0 +1,20 @@
+# secrets
+.env
+
+# virtual env (the JD/ folder is the venv)
+JD/
+venv/
+.venv/
+
+# python
+__pycache__/
+*.pyc
+
+# generated / user data
+chroma_db/
+uploads/*
+!uploads/.gitkeep
+
+# misc
+.DS_Store
+.vscode/
