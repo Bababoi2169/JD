@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-from utils import extract_text, generate_quiz
+from utils import extract_text, generate_quiz, extract_requirements
+from retrieval import get_relevant_questions
 import uuid
 from flask import redirect, url_for
 
@@ -12,7 +13,9 @@ def index():
     if request.method == "POST":
         resume_text = extract_text(request.files["resume"])
         jd_text = request.form["jd"]
-        questions = generate_quiz(resume_text, jd_text)
+        req = extract_requirements(resume_text, jd_text)
+        bank = get_relevant_questions(req["queries"], req.get("role"), max_total=10)
+        questions = generate_quiz(resume_text, jd_text, bank)
         quiz_id = str(uuid.uuid4())
         QUIZZES[quiz_id] = questions
         return redirect(url_for("quiz", quiz_id=quiz_id))

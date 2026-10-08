@@ -22,7 +22,20 @@ def extract_text(file_storage) -> str:
         raise ValueError("Unsupported file type")
     return text.strip()
 
-def generate_quiz(resume_text: str, jd_text: str, n: int = 5) -> list[dict]:
+def generate_quiz(resume_text: str, jd_text: str, bank_questions: list[dict] | None = None, n: int = 5) -> list[dict]:
+    grounding = ""
+    if bank_questions:
+        lines = [
+            f'- [{b["id"]}] ({b["topic"]}, {b["difficulty"]}) {b["question"]} | Reference: {b["reference_answer"]}'
+            for b in bank_questions
+        ]
+        grounding = (
+            "REFERENCE QUESTIONS from our interview bank. Adapt the most relevant ones to this "
+            "candidate (reference the resume or JD where natural). Keep answers factually consistent "
+            "with the reference answers. Set source_id to the bank ID, or null if you wrote it yourself:\n"
+            + "\n".join(lines) + "\n\n"
+        )
+
     prompt = f"""You are an interview coach. Using the resume and job description below,
 create {n} multiple-choice interview questions personalized to this candidate and role.
 
@@ -34,6 +47,7 @@ Return ONLY a JSON object: {{"questions": [{{
   "topic": str,
   "difficulty": "easy" | "medium" | "hard",
   "tied_to": str (which resume item or JD requirement this targets)
+  "source_id": str or null (bank ID this was adapted from),
 }}]}}
 
 RESUME:
@@ -48,7 +62,16 @@ JOB DESCRIPTION:
         response_format={"type": "json_object"},
         temperature=0.7,
     )
-    return json.loads(resp.choices[0].message.content)["questions"]
+    data = json.loads(resp.choices[0].message.content)["questions"]
+    print(json.dumps(data, indent=1))   # temporary debug
+    def valid(q):
+        o = q.get("options")
+        return (isinstance(o, list) and len(o) == 4
+                and all(isinstance(x, str) and x.strip() for x in o)
+                and isinstance(q.get("correct_index"), int)
+                and 0 <= q["correct_index"] < 4)
+
+    return [q for q in data if valid(q)]
 
 def extract_requirements(resume_text: str, jd_text: str) -> dict:
     vocab = json.load(open("data/vocab.json"))

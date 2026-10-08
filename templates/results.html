@@ -5,5 +5,6 @@
   <p>Your answer: {{ r.options[r.picked] }} {{ "✓" if r.correct else "✗" }}</p>
   {% if not r.correct %}<p>Correct: {{ r.options[r.correct_index] }}</p>{% endif %}
   <p>{{ r.explanation }}</p>
+  <small>Targets: {{ r.tied_to }}{% if r.source_id %} | Bank: {{ r.source_id }}{% endif %}</small>
 {% endfor %}
 <a href="{{ url_for('index') }}">New quiz</a>
