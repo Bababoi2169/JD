@@ -1,5 +1,10 @@
-{% for q in questions %}
-  <h3>{{ loop.index }}. {{ q.question }}</h3>
-  <ul>{% for o in q.options %}<li>{{ o }}</li>{% endfor %}</ul>
-  <small>{{ q.topic }} | {{ q.difficulty }} | {{ q.tied_to }}</small>
-{% endfor %}
+<form method="POST" action="{{ url_for('submit', quiz_id=quiz_id) }}">
+  {% for q in questions %}
+    {% set qi = loop.index0 %}
+    <h3>{{ loop.index }}. {{ q.question }}</h3>
+    {% for o in q.options %}
+      <label><input type="radio" name="q{{ qi }}" value="{{ loop.index0 }}" required> {{ o }}</label><br>
+    {% endfor %}
+  {% endfor %}
+  <button type="submit">Submit</button>
+</form>
