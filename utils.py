@@ -49,3 +49,24 @@ JOB DESCRIPTION:
         temperature=0.7,
     )
     return json.loads(resp.choices[0].message.content)["questions"]
+
+def extract_requirements(resume_text: str, jd_text: str) -> dict:
+    vocab = json.load(open("data/vocab.json"))
+    prompt = f"""From the job description and resume, return ONLY JSON:
+{{"role": one of {vocab["roles"]} or null if none fit,
+  "queries": [6-10 short skill/topic phrases (2-4 words) the interview should cover,
+              prioritising JD requirements, especially ones weak or missing in the resume]}}
+
+JOB DESCRIPTION:
+{jd_text[:4000]}
+
+RESUME:
+{resume_text[:4000]}"""
+    resp = client.chat.completions.create(
+        model=MODEL,
+        messages=[{"role": "user", "content": prompt}],
+        response_format={"type": "json_object"},
+        temperature=0.2,
+        max_tokens=1000,
+    )
+    return json.loads(resp.choices[0].message.content)
