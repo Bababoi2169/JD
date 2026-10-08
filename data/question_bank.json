@@ -1,0 +1,3698 @@
+[
+  {
+    "id": "bd-sql-001",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "What does the SELECT statement do in SQL?",
+    "reference_answer": "It retrieves data from one or more tables, allowing you to specify which columns to return and how to filter, sort, or group the results.",
+    "tags": [
+      "SQL",
+      "SELECT",
+      "query"
+    ]
+  },
+  {
+    "id": "bd-sql-002",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "How do you filter rows in a query?",
+    "reference_answer": "Use the WHERE clause to specify conditions that rows must meet to be included in the result set.",
+    "tags": [
+      "SQL",
+      "WHERE",
+      "filter"
+    ]
+  },
+  {
+    "id": "bd-sql-003",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "What is a primary key and why is it important?",
+    "reference_answer": "A primary key uniquely identifies each row in a table and ensures that no duplicate or null values exist in that column.",
+    "tags": [
+      "SQL",
+      "primary_key",
+      "schema"
+    ]
+  },
+  {
+    "id": "bd-sql-004",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "How do you combine rows from two tables based on a related column?",
+    "reference_answer": "Use an INNER JOIN to return rows when there are matching values in both tables on the specified columns.",
+    "tags": [
+      "SQL",
+      "JOIN",
+      "INNER_JOIN"
+    ]
+  },
+  {
+    "id": "bd-sql-005",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "Explain the difference between INNER JOIN and LEFT JOIN and give a scenario where each is appropriate.",
+    "reference_answer": "INNER JOIN returns only rows with matching keys in both tables, while LEFT JOIN returns all rows from the left table and fills missing matches with NULLs; use INNER JOIN for intersecting data and LEFT JOIN when you need all records from the primary table regardless of matches.",
+    "tags": [
+      "joins",
+      "query"
+    ]
+  },
+  {
+    "id": "bd-sql-006",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "How does adding an index improve query performance, and what are the potential downsides of creating too many indexes?",
+    "reference_answer": "Indexes allow the database to locate rows faster, reducing scan time, but each index adds storage overhead and slows INSERT/UPDATE/DELETE operations because the index must be maintained; excessive indexes can degrade write performance and increase maintenance cost.",
+    "tags": [
+      "indexing",
+      "performance"
+    ]
+  },
+  {
+    "id": "bd-sql-007",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "What are the ACID properties of a transaction, and how do isolation levels like READ COMMITTED and SERIALIZABLE affect concurrent access?",
+    "reference_answer": "ACID ensures Atomicity, Consistency, Isolation, and Durability; READ COMMITTED prevents dirty reads but allows non-repeatable reads, whereas SERIALIZABLE provides the highest isolation by emulating serial execution, eliminating phantom reads but reducing concurrency.",
+    "tags": [
+      "transactions",
+      "isolation"
+    ]
+  },
+  {
+    "id": "bd-sql-008",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "Write a SQL query using a window function to calculate a running total of sales amount per day ordered by date.",
+    "reference_answer": "SELECT sale_date, sales_amount, SUM(sales_amount) OVER (ORDER BY sale_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total FROM sales ORDER BY sale_date;",
+    "tags": [
+      "window-functions",
+      "aggregation"
+    ]
+  },
+  {
+    "id": "bd-sql-009",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "Explain how the optimizer decides between a hash join and a nested loop join, and describe scenarios where each is preferable.",
+    "reference_answer": "The optimizer evaluates estimated row counts, data distribution statistics, and available indexes; it chooses a hash join for large, unsorted inputs with equality predicates, and a nested loop join when one side is small or indexed for fast lookups.",
+    "tags": [
+      "joins",
+      "query_planning",
+      "performance"
+    ]
+  },
+  {
+    "id": "bd-sql-010",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "How would you write a recursive CTE to compute the transitive closure of a hierarchical employee\u2011manager relationship, and what are its performance considerations?",
+    "reference_answer": "A recursive CTE starts with the anchor query selecting top\u2011level employees, then UNION ALL with a recursive part joining the CTE to the employee table on manager_id, and you must limit recursion depth or ensure proper indexing to avoid exponential blow\u2011up.",
+    "tags": [
+      "CTE",
+      "hierarchy",
+      "performance"
+    ]
+  },
+  {
+    "id": "bd-sql-011",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "Describe the ACID guarantees of a PostgreSQL transaction when using READ COMMITTED isolation and how a long\u2011running SELECT can affect concurrent updates.",
+    "reference_answer": "READ COMMITTED guarantees that each query sees only data committed before it starts; a long\u2011running SELECT takes a snapshot at its start, so concurrent updates commit without blocking the SELECT, but the SELECT will not see those later changes.",
+    "tags": [
+      "transactions",
+      "isolation",
+      "postgresql"
+    ]
+  },
+  {
+    "id": "bd-sql-012",
+    "role": "backend developer",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "What are the trade\u2011offs between storing JSONB versus a normalized relational schema in PostgreSQL for a high\u2011write workload?",
+    "reference_answer": "JSONB offers schema flexibility and faster writes for semi\u2011structured data but hampers indexing and query performance compared to a normalized schema, which enables fine\u2011grained indexes and better join efficiency at the cost of more complex writes.",
+    "tags": [
+      "jsonb",
+      "schema_design",
+      "performance"
+    ]
+  },
+  {
+    "id": "bd-python-001",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "What is the difference between a list and a tuple in Python?",
+    "reference_answer": "A list is mutable, so its elements can be changed, added, or removed, while a tuple is immutable and cannot be modified after creation; both preserve order of items.",
+    "tags": [
+      "list",
+      "tuple",
+      "data structures"
+    ]
+  },
+  {
+    "id": "bd-python-002",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "How do you read a text file line by line in Python?",
+    "reference_answer": "Use a with\u2011open block and iterate over the file object, e.g., `with open('file.txt') as f: for line in f: process(line)`. This automatically closes the file after the block.",
+    "tags": [
+      "file I/O",
+      "reading",
+      "with"
+    ]
+  },
+  {
+    "id": "bd-python-003",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "What is a dictionary in Python and how do you retrieve a value by key?",
+    "reference_answer": "A dictionary is an unordered collection of key\u2011value pairs; you retrieve a value using the key with `my_dict[key]` or `my_dict.get(key)` to avoid KeyError.",
+    "tags": [
+      "dictionary",
+      "lookup",
+      "data structures"
+    ]
+  },
+  {
+    "id": "bd-python-004",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "Why is the `if __name__ == \"__main__\":` guard used in Python scripts?",
+    "reference_answer": "It ensures that code inside the block runs only when the script is executed directly, not when it is imported as a module by another script.",
+    "tags": [
+      "main guard",
+      "module",
+      "execution"
+    ]
+  },
+  {
+    "id": "bd-python-005",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "Explain the difference between process-based and thread-based concurrency in Python and when you would choose each for a backend service.",
+    "reference_answer": "Process-based concurrency runs in separate memory spaces, bypassing the GIL and is ideal for CPU\u2011bound work, whereas thread-based concurrency shares memory, is limited by the GIL, and works best for I/O\u2011bound tasks.",
+    "tags": [
+      "concurrency",
+      "performance"
+    ]
+  },
+  {
+    "id": "bd-python-006",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "How does the Global Interpreter Lock (GIL) impact multi\u2011threaded web servers in Python, and what strategies can mitigate its effects?",
+    "reference_answer": "The GIL prevents multiple native threads from executing Python bytecode simultaneously, reducing scalability for CPU\u2011heavy workloads; mitigation includes using multiprocessing, async frameworks, or employing C extensions that release the GIL.",
+    "tags": [
+      "GIL",
+      "scalability"
+    ]
+  },
+  {
+    "id": "bd-python-007",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "Describe how a context manager can be used to ensure proper cleanup of a database connection in Python.",
+    "reference_answer": "A context manager implements __enter__ and __exit__ to acquire a DB connection on entry and automatically close or rollback it on exit, guaranteeing cleanup even if exceptions occur.",
+    "tags": [
+      "resource\u2011management",
+      "context\u2011manager"
+    ]
+  },
+  {
+    "id": "bd-python-008",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "What are type hints in Python and how do they benefit large backend codebases?",
+    "reference_answer": "Type hints let developers annotate variable and function signatures with expected types, enabling static analysis tools to catch bugs early, improve IDE autocomplete, and enhance code readability in large projects.",
+    "tags": [
+      "type\u2011hints",
+      "maintainability"
+    ]
+  },
+  {
+    "id": "bd-python-009",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "Explain the Global Interpreter Lock (GIL) impact on CPU-bound multi-threaded applications and how to work around it in a backend service.",
+    "reference_answer": "The GIL ensures only one thread executes Python bytecode at a time, so CPU\u2011bound threads cannot run in parallel; to utilize multiple cores you can use multiprocessing, C extensions that release the GIL, or asynchronous designs.",
+    "tags": [
+      "GIL",
+      "concurrency",
+      "multiprocessing"
+    ]
+  },
+  {
+    "id": "bd-python-010",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "Describe how Python's descriptor protocol can be used to implement lazy-loaded attributes in a class.",
+    "reference_answer": "By defining a class with __get__ that computes the value on first access, stores it on the instance, and returns it thereafter, you create a lazy attribute that avoids unnecessary computation.",
+    "tags": [
+      "descriptor",
+      "lazy-loading",
+      "OOP"
+    ]
+  },
+  {
+    "id": "bd-python-011",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "In a WSGI application, how does the 'start_response' callable interact with the iterable returned by the application, and what are the implications for streaming large responses?",
+    "reference_answer": "start_response sends HTTP status and headers before the first chunk of the response body is yielded; returning an iterator allows the server to stream data chunk\u2011by\u2011chunk, reducing memory usage for large payloads.",
+    "tags": [
+      "WSGI",
+      "streaming",
+      "backend"
+    ]
+  },
+  {
+    "id": "bd-python-012",
+    "role": "backend developer",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "Explain the difference between shallow and deep copy in the context of mutable objects, and why copy.deepcopy may be problematic in a high\u2011throughput service.",
+    "reference_answer": "Shallow copy duplicates only the outer container referencing the same inner objects, while deep copy recursively clones all nested objects; deepcopy can be CPU\u2011intensive and may copy unnecessary data, hurting performance in high\u2011throughput scenarios.",
+    "tags": [
+      "copy",
+      "performance",
+      "mutability"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-001",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "easy",
+    "question": "Explain the difference between a monolithic architecture and a microservices architecture.",
+    "reference_answer": "Monolithic architecture bundles all components into a single deployable unit, while microservices split functionality into independent services that communicate over APIs.",
+    "tags": [
+      "architecture",
+      "monolith",
+      "microservices"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-002",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "easy",
+    "question": "What is load balancing and why is it important in backend systems?",
+    "reference_answer": "Load balancing distributes incoming traffic across multiple servers to improve availability, scalability, and fault tolerance.",
+    "tags": [
+      "load balancing",
+      "scalability",
+      "availability"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-003",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "easy",
+    "question": "How would you design a simple URL shortener service?",
+    "reference_answer": "Store a mapping from a short code to the original URL in a database, generate unique short codes, and use a redirect endpoint to look up and forward requests.",
+    "tags": [
+      "design",
+      "url-shortener",
+      "database"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-004",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "easy",
+    "question": "What is caching and how does it improve system performance?",
+    "reference_answer": "Caching stores frequently accessed data in fast storage (e.g., memory) to reduce latency and load on primary data stores.",
+    "tags": [
+      "caching",
+      "performance",
+      "latency"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-005",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "medium",
+    "question": "How would you design a rate\u2011limiting service that can enforce per\u2011user and per\u2011IP limits for a high\u2011traffic API?",
+    "reference_answer": "Use a distributed token bucket stored in a fast key\u2011value store like Redis, sharding keys by user/IP, and employ Lua scripts for atomic decrement and reset to ensure consistency across instances.",
+    "tags": [
+      "rate limiting",
+      "distributed cache",
+      "API"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-006",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "medium",
+    "question": "Describe a scalable architecture for a notification system that supports email, SMS, and push notifications with high throughput and low latency.",
+    "reference_answer": "Implement a decoupled pipeline using a message queue (e.g., Kafka) to ingest notification requests, worker services to format messages per channel, and third\u2011party provider adapters, while storing delivery status in a durable store for retries.",
+    "tags": [
+      "notification",
+      "message queue",
+      "microservices"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-007",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "medium",
+    "question": "What components would you include in a URL shortener service that must handle billions of URLs and provide fast redirects?",
+    "reference_answer": "Use a write\u2011optimized service that generates short keys (e.g., base\u201162), stores the mapping in a sharded NoSQL database (like DynamoDB), caches hot mappings in an edge CDN, and serves redirects via lightweight HTTP servers behind a load balancer.",
+    "tags": [
+      "URL shortener",
+      "NoSQL",
+      "caching"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-008",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "medium",
+    "question": "Outline a system design for ingesting, storing, and querying time\u2011series metrics from millions of devices in real time.",
+    "reference_answer": "Collect metrics via a lightweight agent sending data to a write\u2011optimized ingestion layer (e.g., Kafka), persist to a time\u2011series database such as InfluxDB or Prometheus, and provide query APIs with down\u2011sampling and retention policies for efficient reads.",
+    "tags": [
+      "time series",
+      "ingestion",
+      "monitoring"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-009",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "hard",
+    "question": "Design a globally distributed, low\u2011latency chat messaging system that must support millions of concurrent users and guarantee message ordering per conversation.",
+    "reference_answer": "Use sharded, geographically partitioned data stores with consistent hashing, route messages via region\u2011local WebSocket gateways, and employ per\u2011conversation sequence numbers stored in a replicated log (e.g., Kafka) to ensure ordering while falling back to eventual consistency across regions.",
+    "tags": [
+      "scalability",
+      "messaging"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-010",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "hard",
+    "question": "How would you implement a rate\u2011limiting service that enforces both per\u2011user and global request limits while handling high request throughput across multiple data\u2011center nodes?",
+    "reference_answer": "Deploy a distributed token\u2011bucket algorithm backed by an in\u2011memory store such as Redis Cluster, using atomic Lua scripts for counter updates and synchronizing global limits via a leaky\u2011bucket aggregator that periodically reconciles counts across nodes.",
+    "tags": [
+      "rate\u2011limiting",
+      "distributed"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-011",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "hard",
+    "question": "Describe the architecture for a multi\u2011tenant SaaS backend that ensures strong data isolation, supports schema evolution, and provides tenant\u2011specific performance SLAs.",
+    "reference_answer": "Adopt a hybrid approach: use separate databases or schemas per tenant for strict isolation, enforce row\u2011level security for shared tables, and version schemas via migration pipelines while routing tenant traffic through dedicated connection pools to meet SLA requirements.",
+    "tags": [
+      "multitenancy",
+      "security"
+    ]
+  },
+  {
+    "id": "bd-systemdesign-012",
+    "role": "backend developer",
+    "topic": "system design",
+    "difficulty": "hard",
+    "question": "Design a backend pipeline that ingests high\u2011velocity event streams and powers real\u2011time analytics dashboards with sub\u2011second latency.",
+    "reference_answer": "Consume events via a distributed log (e.g., Kafka), process them with a stream\u2011processing framework like Flink or Spark Structured Streaming to maintain materialized aggregates in an in\u2011memory store (e.g., Redis or ClickHouse), and expose the results through low\u2011latency APIs for dashboard consumption.",
+    "tags": [
+      "streaming",
+      "analytics"
+    ]
+  },
+  {
+    "id": "bd-apis-001",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "easy",
+    "question": "What does API stand for and what is its primary purpose in web development?",
+    "reference_answer": "API stands for Application Programming Interface; it enables different software components to communicate, allowing a client to request services from a server over HTTP.",
+    "tags": [
+      "basics",
+      "definition"
+    ]
+  },
+  {
+    "id": "bd-apis-002",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "easy",
+    "question": "Explain the difference between REST and SOAP APIs.",
+    "reference_answer": "REST is an architectural style that uses standard HTTP methods and typically JSON, whereas SOAP is a protocol that relies on XML envelopes and predefined operations.",
+    "tags": [
+      "REST",
+      "SOAP"
+    ]
+  },
+  {
+    "id": "bd-apis-003",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "easy",
+    "question": "What HTTP method would you use to retrieve data from an API endpoint and why?",
+    "reference_answer": "You would use GET because it is safe and idempotent, designed to request resource representations without causing side effects.",
+    "tags": [
+      "HTTP",
+      "GET"
+    ]
+  },
+  {
+    "id": "bd-apis-004",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "easy",
+    "question": "How can you secure an API endpoint from unauthorized access?",
+    "reference_answer": "Secure an API by implementing authentication such as API keys, OAuth tokens, or JWTs, and enforce HTTPS to encrypt the traffic.",
+    "tags": [
+      "security",
+      "authentication"
+    ]
+  },
+  {
+    "id": "bd-apis-005",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "medium",
+    "question": "Explain the difference between REST and GraphQL and when you would choose one over the other.",
+    "reference_answer": "REST uses fixed endpoints and resources with multiple round\u2011trips, while GraphQL lets clients request exactly the data they need in a single query; choose REST for simple CRUD services and GraphQL when clients need flexible data shapes or to reduce over\u2011fetching.",
+    "tags": [
+      "REST",
+      "GraphQL"
+    ]
+  },
+  {
+    "id": "bd-apis-006",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "medium",
+    "question": "How can you version a RESTful API without breaking existing clients?",
+    "reference_answer": "Common strategies include using URL versioning (e.g., /v1/), header versioning, or content\u2011negotiation, and maintaining backward\u2011compatible changes while deprecating old versions over time.",
+    "tags": [
+      "Versioning",
+      "BackwardCompatibility"
+    ]
+  },
+  {
+    "id": "bd-apis-007",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "medium",
+    "question": "What does it mean for an HTTP method to be idempotent and why is this property important?",
+    "reference_answer": "An idempotent method produces the same result no matter how many times it is repeated with the same input (e.g., GET, PUT, DELETE), which ensures reliability and safe retries in distributed systems.",
+    "tags": [
+      "Idempotency",
+      "HTTP"
+    ]
+  },
+  {
+    "id": "bd-apis-008",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "medium",
+    "question": "Describe a typical approach to implement rate limiting for an API and the trade\u2011offs involved.",
+    "reference_answer": "Rate limiting can be enforced with token\u2011bucket or leaky\u2011bucket algorithms using middleware or API gateways; trade\u2011offs include complexity vs. precision, impact on latency, and handling burst traffic fairly.",
+    "tags": [
+      "RateLimiting",
+      "Performance"
+    ]
+  },
+  {
+    "id": "bd-apis-009",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "hard",
+    "question": "Explain the differences between REST, GraphQL, and gRPC, and discuss scenarios where each is preferable.",
+    "reference_answer": "REST uses fixed resources and stateless HTTP verbs, suited for simple CRUD; GraphQL provides a flexible query language allowing clients to request exactly needed data, ideal for over-fetching issues; gRPC uses protobuf over HTTP/2 for high-performance, contract\u2011driven RPC, best for low\u2011latency inter\u2011service communication.",
+    "tags": [
+      "REST",
+      "GraphQL",
+      "gRPC"
+    ]
+  },
+  {
+    "id": "bd-apis-010",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "hard",
+    "question": "Describe a robust API versioning strategy that maintains backward compatibility while enabling breaking changes.",
+    "reference_answer": "A common approach is URI versioning (e.g., /v1/) combined with semantic versioning in headers, allowing deprecated endpoints to coexist; deprecate features gradually, provide migration guides, and use feature flags to toggle new behavior without breaking existing clients.",
+    "tags": [
+      "Versioning",
+      "Compatibility",
+      "Migration"
+    ]
+  },
+  {
+    "id": "bd-apis-011",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "hard",
+    "question": "How would you secure a public API against injection, replay attacks, and quota abuse, specifying concrete mechanisms?",
+    "reference_answer": "Validate and sanitize all inputs, employ parameterized queries to prevent injection; use timestamped signed tokens (e.g., JWT with nonce) to mitigate replay; enforce rate limits per API key and implement OAuth 2.0 scopes with throttling to control quota abuse.",
+    "tags": [
+      "Security",
+      "OAuth",
+      "RateLimiting"
+    ]
+  },
+  {
+    "id": "bd-apis-012",
+    "role": "backend developer",
+    "topic": "APIs",
+    "difficulty": "hard",
+    "question": "Discuss the trade\u2011offs between synchronous and asynchronous communication in microservice APIs and how you would implement back\u2011pressure handling.",
+    "reference_answer": "Synchronous calls simplify error handling but can cause cascading latency; asynchronous messaging decouples services and improves resilience but adds eventual consistency complexity. Implement back\u2011pressure with reactive streams (e.g., Project Reactor) or bounded queues and circuit breakers to prevent overload.",
+    "tags": [
+      "Async",
+      "BackPressure",
+      "Microservices"
+    ]
+  },
+  {
+    "id": "bd-algorithms-001",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "easy",
+    "question": "What is the time complexity of binary search and why?",
+    "reference_answer": "O(log n) because each step halves the search space, reducing the number of comparisons logarithmically.",
+    "tags": [
+      "binary search",
+      "time complexity",
+      "search"
+    ]
+  },
+  {
+    "id": "bd-algorithms-002",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "easy",
+    "question": "Explain the difference between a stack and a queue.",
+    "reference_answer": "A stack follows Last-In-First-Out (LIFO) order, while a queue follows First-In-First-Out (FIFO) order.",
+    "tags": [
+      "data structures",
+      "stack",
+      "queue"
+    ]
+  },
+  {
+    "id": "bd-algorithms-003",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "easy",
+    "question": "How does a hash table handle collisions?",
+    "reference_answer": "Common methods are chaining, which stores colliding items in a linked list, and open addressing, which probes for the next free slot.",
+    "tags": [
+      "hash table",
+      "collision handling",
+      "data structures"
+    ]
+  },
+  {
+    "id": "bd-algorithms-004",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "easy",
+    "question": "What is the Big O notation for inserting an element at the beginning of a singly linked list?",
+    "reference_answer": "O(1) because insertion only requires updating the head pointer and the new node's next reference.",
+    "tags": [
+      "linked list",
+      "insertion",
+      "time complexity"
+    ]
+  },
+  {
+    "id": "bd-algorithms-005",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "Explain how a hash table works and discuss its average and worst\u2011case time complexities for insert, lookup, and delete operations.",
+    "reference_answer": "A hash table maps keys to indices using a hash function; average case operations are O(1) due to uniform distribution, while worst\u2011case can degrade to O(n) if many collisions occur and chaining or probing is used.",
+    "tags": [
+      "hashing",
+      "complexity"
+    ]
+  },
+  {
+    "id": "bd-algorithms-006",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "Describe the differences between quicksort and mergesort in terms of stability, space usage, and typical performance on large datasets.",
+    "reference_answer": "Quicksort is in\u2011place and not stable with average O(n log n) time, but worst\u2011case O(n^2); mergesort is stable, requires O(n) extra space, and guarantees O(n log n) time even in the worst case.",
+    "tags": [
+      "sorting",
+      "stability"
+    ]
+  },
+  {
+    "id": "bd-algorithms-007",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "How would you implement rate limiting for an API endpoint using a sliding window algorithm?",
+    "reference_answer": "Maintain a timestamped queue per user and, on each request, discard timestamps older than the window, then allow the request if the queue size is below the limit, achieving O(1) amortized time per request.",
+    "tags": [
+      "rate\u2011limiting",
+      "sliding\u2011window"
+    ]
+  },
+  {
+    "id": "bd-algorithms-008",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "What is the time complexity of finding the shortest path in an unweighted graph, and which algorithm would you use in a backend service that processes social network connections?",
+    "reference_answer": "Breadth\u2011first search finds the shortest path in O(V+E) time for unweighted graphs, making it suitable for traversing social connections efficiently.",
+    "tags": [
+      "graph",
+      "bfs"
+    ]
+  },
+  {
+    "id": "bd-algorithms-009",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "hard",
+    "question": "Compare the time and space complexities of using a min\u2011heap versus Quickselect to find the k\u2011th smallest element in a massive unsorted dataset, and discuss the trade\u2011offs for a backend service handling streaming data.",
+    "reference_answer": "A min\u2011heap of size k yields O(n\u202flog\u202fk) time and O(k) space, while Quickselect runs in average O(n) time and O(1) extra space but degrades to O(n\u00b2) worst\u2011case; the heap is more predictable for streaming inserts, whereas Quickselect is faster for one\u2011off queries.",
+    "tags": [
+      "heap",
+      "quickselect",
+      "complexity"
+    ]
+  },
+  {
+    "id": "bd-algorithms-010",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "hard",
+    "question": "Design an algorithmic rate\u2011limiting mechanism that enforces N requests per minute per user with O(1) per\u2011request time and minimal memory overhead.",
+    "reference_answer": "A fixed\u2011size sliding\u2011window counter using a circular array of 60 slots per user provides O(1) updates and queries, storing only the count per second and the timestamp of the oldest slot, resulting in O(U) memory where U is the number of active users.",
+    "tags": [
+      "rate-limiting",
+      "sliding-window",
+      "O(1)"
+    ]
+  },
+  {
+    "id": "bd-algorithms-011",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "hard",
+    "question": "Explain how consistent hashing distributes load across microservice instances and describe the algorithmic challenges when nodes dynamically join or leave the ring.",
+    "reference_answer": "Consistent hashing maps keys to points on a hash ring and assigns each key to the next clockwise node, ensuring O(log\u202fN) lookup with virtual nodes to balance load; node joins/leaves require only O(V) key migrations (V = virtual nodes per physical node) but raise challenges in maintaining monotonicity and minimizing data movement.",
+    "tags": [
+      "consistent-hashing",
+      "distributed-systems",
+      "load-balancing"
+    ]
+  },
+  {
+    "id": "bd-algorithms-012",
+    "role": "backend developer",
+    "topic": "algorithms",
+    "difficulty": "hard",
+    "question": "Describe the algorithm to detect a deadlock in a multithreaded backend using a wait\u2011for graph and state its detection complexity.",
+    "reference_answer": "Deadlock detection builds a wait\u2011for graph where vertices are threads and edges represent waiting relations, then runs a cycle detection (e.g., Tarjan's SCC) in O(T\u202f+\u202fE) time, where T is the number of threads and E the number of waiting edges.",
+    "tags": [
+      "deadlock",
+      "graph-algorithm",
+      "cycle-detection"
+    ]
+  },
+  {
+    "id": "fd-javascript-001",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "easy",
+    "question": "What is the difference between var, let, and const in JavaScript?",
+    "reference_answer": "var is function-scoped and can be redeclared, let is block-scoped and cannot be redeclared in the same scope, and const is block-scoped, must be initialized, and cannot be reassigned.",
+    "tags": [
+      "variables",
+      "scope"
+    ]
+  },
+  {
+    "id": "fd-javascript-002",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "easy",
+    "question": "How does the JavaScript event loop handle asynchronous code?",
+    "reference_answer": "The event loop processes the call stack and, when empty, pulls callbacks from the task (macrotask) queue and the microtask queue, executing them in order.",
+    "tags": [
+      "event-loop",
+      "asynchronous"
+    ]
+  },
+  {
+    "id": "fd-javascript-003",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "easy",
+    "question": "What does the === operator check in JavaScript?",
+    "reference_answer": "It checks for strict equality, requiring both the value and type to be identical without type coercion.",
+    "tags": [
+      "equality",
+      "operators"
+    ]
+  },
+  {
+    "id": "fd-javascript-004",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "easy",
+    "question": "How can you add an element to the beginning of an array in JavaScript?",
+    "reference_answer": "Use the unshift() method, which inserts one or more elements at the start of the array and returns the new length.",
+    "tags": [
+      "arrays",
+      "methods"
+    ]
+  },
+  {
+    "id": "fd-javascript-005",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "medium",
+    "question": "Explain event delegation in the DOM and why it is useful for handling many similar elements.",
+    "reference_answer": "Event delegation attaches a single listener to a common ancestor, relying on event bubbling so that events from child elements are captured centrally, which reduces memory usage and simplifies handling of dynamically added elements.",
+    "tags": [
+      "event handling",
+      "DOM",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-javascript-006",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "medium",
+    "question": "What are the key differences between var, let, and const in terms of scope, hoisting, and reassignment?",
+    "reference_answer": "var is function\u2011scoped and hoisted with an undefined initializer, let and const are block\u2011scoped and hoisted but remain uninitialized until their declaration (temporal dead zone); let allows reassignment while const creates a read\u2011only binding.",
+    "tags": [
+      "variables",
+      "scope",
+      "ES6"
+    ]
+  },
+  {
+    "id": "fd-javascript-007",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "medium",
+    "question": "How does the JavaScript event loop prioritize microtasks versus macrotasks, and what impact does this have on UI updates?",
+    "reference_answer": "After each macrotask (e.g., a timer or I/O callback) the event loop processes all queued microtasks (promises, mutation observers) before rendering or handling the next macrotask, ensuring promise resolutions run before UI repaints.",
+    "tags": [
+      "event loop",
+      "async",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-javascript-008",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "medium",
+    "question": "Differentiate between the spread operator and rest parameters in function calls and array/object literals.",
+    "reference_answer": "The spread operator expands an iterable into individual elements (e.g., [...arr] or {...obj}), while rest parameters collect multiple arguments into a single array within a function definition (e.g., function(...args)).",
+    "tags": [
+      "syntax",
+      "functions",
+      "ES6"
+    ]
+  },
+  {
+    "id": "fd-javascript-009",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "hard",
+    "question": "Explain how the JavaScript event loop schedules macrotasks and microtasks, and how this ordering affects the execution of Promises versus setTimeout callbacks.",
+    "reference_answer": "The event loop processes all microtasks (e.g., Promise callbacks) after the current call stack clears and before the next macrotask (e.g., setTimeout) runs, ensuring Promise handlers execute earlier than timed callbacks.",
+    "tags": [
+      "event-loop",
+      "async"
+    ]
+  },
+  {
+    "id": "fd-javascript-010",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "hard",
+    "question": "Describe prototypal inheritance in JavaScript and contrast it with classical inheritance models, providing a code example that uses Object.create to achieve inheritance without constructor functions.",
+    "reference_answer": "JavaScript objects inherit directly from other objects via the prototype chain, unlike class\u2011based languages that use classes; using Object.create lets you set a prototype explicitly, e.g., const child = Object.create(parent);",
+    "tags": [
+      "inheritance",
+      "prototype"
+    ]
+  },
+  {
+    "id": "fd-javascript-011",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "hard",
+    "question": "What are closures in JavaScript, and why can they cause memory leaks when combined with event listeners attached to long\u2011lived DOM elements?",
+    "reference_answer": "A closure captures variables from its lexical scope, keeping them alive even after the outer function returns; if a closure references a DOM element and is stored in a listener on a persistent object, the element cannot be garbage\u2011collected, leading to leaks.",
+    "tags": [
+      "closures",
+      "memory"
+    ]
+  },
+  {
+    "id": "fd-javascript-012",
+    "role": "frontend developer",
+    "topic": "JavaScript",
+    "difficulty": "hard",
+    "question": "Compare the behavior of the == and === operators with respect to type coercion, and give an example where using == yields an unexpected truthy result.",
+    "reference_answer": "== performs abstract equality with type coercion, while === requires both type and value to match; for instance, [] == false evaluates to true because [] is coerced to '' then to 0, matching false's numeric conversion.",
+    "tags": [
+      "equality",
+      "type-coercion"
+    ]
+  },
+  {
+    "id": "fd-react-001",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "easy",
+    "question": "What is a component in React?",
+    "reference_answer": "A component is a reusable piece of UI defined as a JavaScript function or class that returns JSX.",
+    "tags": [
+      "components",
+      "basics"
+    ]
+  },
+  {
+    "id": "fd-react-002",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "easy",
+    "question": "How do you create state in a functional component?",
+    "reference_answer": "Use the useState hook, for example: const [count, setCount] = useState(initialValue).",
+    "tags": [
+      "hooks",
+      "state"
+    ]
+  },
+  {
+    "id": "fd-react-003",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "easy",
+    "question": "What is the purpose of the key prop in lists?",
+    "reference_answer": "The key prop helps React identify which items have changed, been added, or removed, improving rendering performance.",
+    "tags": [
+      "lists",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-react-004",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "easy",
+    "question": "How do you pass data from a parent component to a child component?",
+    "reference_answer": "Pass data via props by adding attributes to the child component, e.g., <Child data={value} />.",
+    "tags": [
+      "props",
+      "data-flow"
+    ]
+  },
+  {
+    "id": "fd-react-005",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "medium",
+    "question": "What is the purpose of the dependency array in a useEffect hook, and what happens if you omit it or provide an empty array?",
+    "reference_answer": "The dependency array tells React when to re\u2011run the effect; omitting it runs the effect after every render, while an empty array runs it only once after the initial mount.",
+    "tags": [
+      "useEffect",
+      "dependencies",
+      "hooks"
+    ]
+  },
+  {
+    "id": "fd-react-006",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "medium",
+    "question": "How does React.memo differ from useCallback when optimizing component re\u2011renders, and when would you use each?",
+    "reference_answer": "React.memo memoizes a component to skip re\u2011rendering when its props are shallowly equal, whereas useCallback memoizes a function reference to prevent passing new callbacks to child components; use React.memo for pure components and useCallback when you need stable callbacks as props.",
+    "tags": [
+      "performance",
+      "memoization",
+      "hooks"
+    ]
+  },
+  {
+    "id": "fd-react-007",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "medium",
+    "question": "Explain the difference between controlled and uncontrolled form components in React, and give an example of when an uncontrolled component might be preferred.",
+    "reference_answer": "Controlled components store their value in React state and update via onChange, providing instant validation, while uncontrolled components rely on the DOM for value storage accessed via refs; uncontrolled inputs are useful for simple forms or when integrating non\u2011React libraries that manage their own state.",
+    "tags": [
+      "forms",
+      "controlled",
+      "uncontrolled"
+    ]
+  },
+  {
+    "id": "fd-react-008",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "medium",
+    "question": "What are potential performance pitfalls when using the Context API, and how can you mitigate them?",
+    "reference_answer": "Every consumer of a Context re\u2011renders when the provider's value changes, even if only part of the value updates; to mitigate, split context into smaller pieces, memoize the provider value with useMemo, or use selector patterns with custom hooks.",
+    "tags": [
+      "Context",
+      "performance",
+      "optimization"
+    ]
+  },
+  {
+    "id": "fd-react-009",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "hard",
+    "question": "Explain React's reconciliation algorithm and how the choice of keys influences its efficiency and correctness.",
+    "reference_answer": "React diffing compares the previous and next virtual DOM trees, using keys to uniquely identify elements in lists, which allows it to minimize moves and preserve component state during updates.",
+    "tags": [
+      "reconciliation",
+      "keys",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-react-010",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "hard",
+    "question": "Describe the core principles of React's concurrent features and the main APIs that enable them, such as Suspense and useTransition.",
+    "reference_answer": "Concurrent features let React render updates without blocking the UI by interrupting and resuming work, with Suspense handling asynchronous loading and useTransition marking UI updates as low priority.",
+    "tags": [
+      "concurrent",
+      "suspense",
+      "useTransition"
+    ]
+  },
+  {
+    "id": "fd-react-011",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "hard",
+    "question": "How would you create a custom hook that synchronizes a state variable with localStorage while supporting server-side rendering?",
+    "reference_answer": "The hook initializes state lazily by checking if window is defined, reads from localStorage if available, and writes back in a useEffect that runs only on the client, ensuring SSR safety.",
+    "tags": [
+      "customHook",
+      "localStorage",
+      "SSR"
+    ]
+  },
+  {
+    "id": "fd-react-012",
+    "role": "frontend developer",
+    "topic": "React",
+    "difficulty": "hard",
+    "question": "What are common pitfalls when using async functions inside useEffect, and how can you correctly clean up to prevent memory leaks?",
+    "reference_answer": "Using async directly in useEffect can cause unhandled promises; instead, define an inner async function, call it, and use a cleanup flag or AbortController to cancel ongoing work when the component unmounts.",
+    "tags": [
+      "useEffect",
+      "async",
+      "cleanup"
+    ]
+  },
+  {
+    "id": "fd-css-001",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "easy",
+    "question": "What does the CSS property `display: flex` do?",
+    "reference_answer": "It turns the element into a flex container, allowing its children to be arranged in a flexible row or column layout.",
+    "tags": [
+      "layout",
+      "flexbox"
+    ]
+  },
+  {
+    "id": "fd-css-002",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "easy",
+    "question": "How can you center a block-level element horizontally using margin?",
+    "reference_answer": "Set `margin-left:auto` and `margin-right:auto` on the element and give it a defined width.",
+    "tags": [
+      "centering",
+      "margin"
+    ]
+  },
+  {
+    "id": "fd-css-003",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "easy",
+    "question": "Which CSS selector selects all <p> elements that are direct children of a <div>?",
+    "reference_answer": "The selector `div > p` matches <p> elements that are immediate children of a <div>.",
+    "tags": [
+      "selector",
+      "combinator"
+    ]
+  },
+  {
+    "id": "fd-css-004",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "easy",
+    "question": "What is the purpose of `box-sizing: border-box`?",
+    "reference_answer": "It includes the element's padding and border within its specified width and height, simplifying layout calculations.",
+    "tags": [
+      "box-model",
+      "property"
+    ]
+  },
+  {
+    "id": "fd-css-005",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "medium",
+    "question": "Explain how CSS calculates specificity and how it influences the cascade when multiple rules target the same element.",
+    "reference_answer": "Specificity is calculated as a four-part value (inline, IDs, classes/attributes/pseudo-classes, elements/pseudo-elements); the rule with the highest specificity wins, and if equal, later rules in the stylesheet override earlier ones.",
+    "tags": [
+      "cascade",
+      "specificity"
+    ]
+  },
+  {
+    "id": "fd-css-006",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "medium",
+    "question": "Compare CSS Flexbox and CSS Grid, highlighting scenarios where each layout model is most appropriate.",
+    "reference_answer": "Flexbox is a one\u2011dimensional layout system ideal for aligning items in a single row or column, while Grid is two\u2011dimensional, allowing placement of items in rows and columns simultaneously, making it better for complex page layouts.",
+    "tags": [
+      "flexbox",
+      "grid"
+    ]
+  },
+  {
+    "id": "fd-css-007",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "medium",
+    "question": "What is the purpose of the @media rule in CSS and how would you write a media query targeting high\u2011resolution (retina) displays?",
+    "reference_answer": "@media applies styles conditionally based on device characteristics; a retina query can be written as @media only screen and (min\u2011device\u2011pixel\u2011ratio:2) or (min-resolution:192dpi).",
+    "tags": [
+      "media queries",
+      "responsive"
+    ]
+  },
+  {
+    "id": "fd-css-008",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "medium",
+    "question": "Describe how position: sticky works and mention any notable browser compatibility considerations.",
+    "reference_answer": "position: sticky behaves like relative positioning until the element reaches a defined offset while scrolling, then it becomes fixed; it is widely supported in modern browsers but older versions of IE and early Edge lack full support.",
+    "tags": [
+      "positioning",
+      "sticky"
+    ]
+  },
+  {
+    "id": "fd-css-009",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "hard",
+    "question": "Explain the CSS cascade and specificity algorithm, including how !important and inline styles affect rule precedence.",
+    "reference_answer": "The cascade orders rules by origin, importance, specificity and source order; inline styles have the highest specificity, !important overrides normal declarations but can be overridden by later !important rules with higher specificity, and finally later rules win when all else is equal.",
+    "tags": [
+      "cascade",
+      "specificity"
+    ]
+  },
+  {
+    "id": "fd-css-010",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "hard",
+    "question": "Describe how the CSS contain property works and its impact on layout, style, and paint performance.",
+    "reference_answer": "contain isolates an element\u2019s subtree, preventing its layout, style, or paint from affecting outside elements; using values like layout, style, paint or all lets the browser skip recalculations for the rest of the page, improving performance.",
+    "tags": [
+      "contain",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-css-011",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "hard",
+    "question": "How does the CSS Grid subgrid feature work and what are the current browser support considerations?",
+    "reference_answer": "subgrid lets a grid item inherit its parent\u2019s row and column tracks, enabling nested grids to align without redefining tracks; it is supported in Firefox and Chrome\u202f105+ (with some limitations) but not in Safari as of now.",
+    "tags": [
+      "grid",
+      "subgrid"
+    ]
+  },
+  {
+    "id": "fd-css-012",
+    "role": "frontend developer",
+    "topic": "CSS",
+    "difficulty": "hard",
+    "question": "Explain the difference between CSS logical properties and physical properties, and give an example of using logical properties for internationalization.",
+    "reference_answer": "Logical properties use flow\u2011relative keywords (e.g., margin-inline-start, block-size) that adapt to writing\u2011mode and direction, whereas physical properties (margin\u2011left, height) are fixed; using margin-inline-start ensures correct spacing in both LTR and RTL languages.",
+    "tags": [
+      "logical",
+      "i18n"
+    ]
+  },
+  {
+    "id": "fd-webperformance-001",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "easy",
+    "question": "What is lazy loading of images and how does it improve web performance?",
+    "reference_answer": "Lazy loading defers loading images until they are about to enter the viewport, reducing initial payload and speeding up first paint.",
+    "tags": [
+      "lazy-loading",
+      "image-optimization",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-webperformance-002",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "easy",
+    "question": "Why should you minimize the number of HTTP requests on a page?",
+    "reference_answer": "Each request adds latency; reducing them (e.g., via bundling or sprites) speeds up page load and lowers network overhead.",
+    "tags": [
+      "http-requests",
+      "bundling",
+      "latency"
+    ]
+  },
+  {
+    "id": "fd-webperformance-003",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "easy",
+    "question": "What does the browser\u2019s \u201ccritical rendering path\u201d refer to?",
+    "reference_answer": "It\u2019s the sequence of steps the browser follows to turn HTML, CSS, and JavaScript into pixels; optimizing it (e.g., by inlining critical CSS) speeds up first contentful paint.",
+    "tags": [
+      "rendering-path",
+      "critical-css",
+      "first-paint"
+    ]
+  },
+  {
+    "id": "fd-webperformance-004",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "easy",
+    "question": "How does using a Content Delivery Network (CDN) help performance?",
+    "reference_answer": "A CDN serves assets from geographically close edge servers, reducing round\u2011trip time and improving load speed for users worldwide.",
+    "tags": [
+      "cdn",
+      "latency",
+      "global-distribution"
+    ]
+  },
+  {
+    "id": "fd-webperformance-005",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "medium",
+    "question": "What is the Critical Rendering Path and how can you optimize it?",
+    "reference_answer": "The Critical Rendering Path is the sequence of steps the browser takes to convert HTML, CSS, and JavaScript into pixels on the screen; you can optimize it by minimizing render\u2011blocking resources, inlining critical CSS, and deferring non\u2011essential scripts.",
+    "tags": [
+      "critical rendering",
+      "optimization"
+    ]
+  },
+  {
+    "id": "fd-webperformance-006",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "medium",
+    "question": "Explain the difference between lazy loading images and using the srcset attribute for responsive images.",
+    "reference_answer": "Lazy loading delays image download until the element enters the viewport, reducing initial load, while srcset provides multiple image candidates for different device resolutions, allowing the browser to choose the most appropriate file without delaying load.",
+    "tags": [
+      "lazy loading",
+      "responsive images"
+    ]
+  },
+  {
+    "id": "fd-webperformance-007",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "medium",
+    "question": "How does HTTP/2 server push affect web performance and when should it be used?",
+    "reference_answer": "HTTP/2 server push lets the server proactively send resources the client will need, reducing round\u2011trip latency, but it should be used sparingly for truly critical assets to avoid wasted bandwidth and cache duplication.",
+    "tags": [
+      "http/2",
+      "server push"
+    ]
+  },
+  {
+    "id": "fd-webperformance-008",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "medium",
+    "question": "What are the main causes of layout thrashing and how can you prevent it in JavaScript?",
+    "reference_answer": "Layout thrashing occurs when scripts read layout properties (e.g., offsetHeight) after making DOM writes, forcing repeated reflows; prevent it by batching reads and writes separately or using requestAnimationFrame.",
+    "tags": [
+      "layout thrashing",
+      "reflow"
+    ]
+  },
+  {
+    "id": "fd-webperformance-009",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "hard",
+    "question": "Explain the Critical Rendering Path and how you would optimize it for a large single-page application (SPA).",
+    "reference_answer": "The Critical Rendering Path consists of HTML parsing, CSSOM construction, JavaScript execution, and layout/paint; for a large SPA you can inline critical CSS, defer non-essential JS, split code with dynamic imports, and use server\u2011side rendering to deliver a minimal initial payload.",
+    "tags": [
+      "critical rendering",
+      "SPA",
+      "optimization"
+    ]
+  },
+  {
+    "id": "fd-webperformance-010",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "hard",
+    "question": "How does HTTP/2 multiplexing affect resource loading, and what strategies would you use to maximize its benefits?",
+    "reference_answer": "HTTP/2 multiplexing allows multiple requests over a single connection, eliminating head\u2011of\u2011line blocking; to leverage it you should consolidate assets into fewer requests, use server push cautiously, and avoid excessive domain sharding that negates multiplexing gains.",
+    "tags": [
+      "http2",
+      "resource loading",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-webperformance-011",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "hard",
+    "question": "Describe the impact of JavaScript execution on the main thread and techniques to mitigate jank during complex animations.",
+    "reference_answer": "Heavy JavaScript blocks the main thread, causing frame drops in animations; mitigating jank involves offloading work to Web Workers, using requestAnimationFrame for visual updates, minimizing layout thrashing, and employing CSS animations/transitions where possible.",
+    "tags": [
+      "js execution",
+      "animation",
+      "main thread"
+    ]
+  },
+  {
+    "id": "fd-webperformance-012",
+    "role": "frontend developer",
+    "topic": "web performance",
+    "difficulty": "hard",
+    "question": "What are the trade\u2011offs between using Service Workers for caching versus traditional HTTP caching headers in terms of performance and consistency?",
+    "reference_answer": "Service Workers give fine\u2011grained control over caching, enabling offline support and stale\u2011while\u2011revalidate patterns, but they add complexity and can serve outdated resources if not managed; HTTP caching headers are simpler and automatically kept consistent by the browser, though they lack the programmable flexibility of Service Workers.",
+    "tags": [
+      "service worker",
+      "caching",
+      "consistency"
+    ]
+  },
+  {
+    "id": "fd-algorithms-001",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "easy",
+    "question": "What is the time complexity of accessing an element by index in a JavaScript array?",
+    "reference_answer": "Accessing an element by its index in a JavaScript array is O(1) because arrays provide direct indexed access.",
+    "tags": [
+      "time complexity",
+      "array",
+      "javascript"
+    ]
+  },
+  {
+    "id": "fd-algorithms-002",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "easy",
+    "question": "Explain the difference between depth-first search (DFS) and breadth-first search (BFS) and give a scenario where each might be used in a web application.",
+    "reference_answer": "DFS explores a branch as deep as possible before backtracking, while BFS visits all nodes at the current depth before moving deeper; DFS can be used to traverse a DOM tree for deep operations, and BFS is useful for finding the shortest path in a navigation graph.",
+    "tags": [
+      "graph traversal",
+      "DFS",
+      "BFS"
+    ]
+  },
+  {
+    "id": "fd-algorithms-003",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "easy",
+    "question": "What is a hash function and how is it used in JavaScript objects?",
+    "reference_answer": "A hash function maps keys to indices for fast lookup, and JavaScript objects internally hash property names to provide O(1) access to values.",
+    "tags": [
+      "hashing",
+      "objects",
+      "lookup"
+    ]
+  },
+  {
+    "id": "fd-algorithms-004",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "easy",
+    "question": "Describe a simple algorithm to debounce a function in JavaScript and its purpose.",
+    "reference_answer": "Debounce delays a function\u2019s execution until a specified wait time has passed since the last call, preventing excessive invocations; it can be implemented by resetting a timer on each call and invoking the function only when the timer completes.",
+    "tags": [
+      "debounce",
+      "performance",
+      "event handling"
+    ]
+  },
+  {
+    "id": "fd-algorithms-005",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "Explain how you would implement a debounce function in JavaScript and discuss its time complexity.",
+    "reference_answer": "A debounce function returns a wrapper that delays invoking the original function until after a specified wait time has elapsed since the last call, typically using setTimeout and clearing previous timers; its overhead is O(1) per call, with the delayed function executing once after inactivity.",
+    "tags": [
+      "debounce",
+      "performance",
+      "javascript"
+    ]
+  },
+  {
+    "id": "fd-algorithms-006",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "Describe the algorithm behind React's reconciliation (diff) process and its big\u2011O performance characteristics.",
+    "reference_answer": "React's reconciliation uses a heuristic diff algorithm that compares the new virtual DOM tree to the previous one, matching elements by type and key; it runs in O(n) time where n is the number of nodes, assuming stable keys reduce the need for deep subtree comparisons.",
+    "tags": [
+      "react",
+      "diff",
+      "complexity"
+    ]
+  },
+  {
+    "id": "fd-algorithms-007",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "How would you efficiently find the nth largest element in an unsorted array of numbers on the client side?",
+    "reference_answer": "You can use the Quickselect algorithm, a selection variant of quicksort, which partitions the array recursively and runs in average O(n) time, achieving worst\u2011case O(n\u00b2) without median\u2011of\u2011medians optimization.",
+    "tags": [
+      "selection",
+      "quickselect",
+      "algorithm"
+    ]
+  },
+  {
+    "id": "fd-algorithms-008",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "medium",
+    "question": "What is the purpose of memoization in functional UI components and how does it affect algorithmic complexity?",
+    "reference_answer": "Memoization caches the result of a pure function based on its inputs, turning repeated O(f) computations into O(1) lookups after the first execution, thus improving performance especially for expensive calculations in render cycles.",
+    "tags": [
+      "memoization",
+      "performance",
+      "caching"
+    ]
+  },
+  {
+    "id": "fd-algorithms-009",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "hard",
+    "question": "Explain the time and space complexity of diffing two virtual DOM trees and how React's reconciliation algorithm optimizes updates.",
+    "reference_answer": "The diffing process is O(n) in the number of nodes, but React uses heuristics like key attributes and component boundaries to prune the tree, reducing actual work and keeping space usage linear to the tree size.",
+    "tags": [
+      "virtual-dom",
+      "complexity",
+      "react"
+    ]
+  },
+  {
+    "id": "fd-algorithms-010",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "hard",
+    "question": "Describe an efficient algorithm to debounce a high-frequency event stream in the browser, including handling trailing calls.",
+    "reference_answer": "Use a timer that resets on each event; when the timer expires, invoke the handler. To support trailing calls, store the latest event arguments and ensure the handler runs after the final pause.",
+    "tags": [
+      "debounce",
+      "event-handling",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-algorithms-011",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "hard",
+    "question": "Given a large list of items to render with infinite scrolling, design an algorithm to manage windowing/virtualization to maintain O(1) DOM updates per scroll event.",
+    "reference_answer": "Maintain a sliding window of visible items and recycle DOM nodes: on scroll, calculate the new start index, reuse existing elements by updating their content and repositioning them, ensuring only a constant number of DOM mutations per update.",
+    "tags": [
+      "virtualization",
+      "infinite-scroll",
+      "performance"
+    ]
+  },
+  {
+    "id": "fd-algorithms-012",
+    "role": "frontend developer",
+    "topic": "algorithms",
+    "difficulty": "hard",
+    "question": "How would you implement a priority queue in JavaScript to schedule network requests with varying importance, and what is its amortized complexity for enqueue and dequeue operations?",
+    "reference_answer": "Implement a binary heap stored in an array; enqueue (push) and bubble\u2011up is O(log\u202fn), dequeue (pop) and bubble\u2011down is also O(log\u202fn) amortized, providing efficient priority scheduling.",
+    "tags": [
+      "priority-queue",
+      "data-structures",
+      "network"
+    ]
+  },
+  {
+    "id": "da-sql-001",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "What is the purpose of the GROUP BY clause?",
+    "reference_answer": "It groups rows that share a column value so aggregate functions can be applied to each group.",
+    "tags": [
+      "GROUP BY",
+      "aggregation"
+    ]
+  },
+  {
+    "id": "da-sql-002",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "How can you combine results from two tables with matching rows?",
+    "reference_answer": "Use an INNER JOIN, which returns rows where the join condition is satisfied in both tables.",
+    "tags": [
+      "JOIN",
+      "INNER JOIN"
+    ]
+  },
+  {
+    "id": "da-sql-003",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "Explain the difference between INNER JOIN and LEFT JOIN and when you would choose each in a data analysis scenario.",
+    "reference_answer": "INNER JOIN returns only rows with matching keys in both tables, while LEFT JOIN returns all rows from the left table and fills missing matches with NULLs; use LEFT JOIN when you need to retain all records from the primary dataset even if related data is absent.",
+    "tags": [
+      "joins",
+      "data_integrity"
+    ]
+  },
+  {
+    "id": "da-sql-004",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "Write a SQL query to retrieve the top 3 selling products for each month based on sales quantity.",
+    "reference_answer": "Use a window function: SELECT month, product_id, sales_qty FROM (SELECT month, product_id, sales_qty, ROW_NUMBER() OVER (PARTITION BY month ORDER BY sales_qty DESC) AS rn FROM sales) sub WHERE rn <= 3;",
+    "tags": [
+      "aggregation",
+      "ranking"
+    ]
+  },
+  {
+    "id": "da-sql-005",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "What is a window function in SQL and how does ROW_NUMBER() differ from RANK()? Provide a brief example.",
+    "reference_answer": "A window function performs calculations across a set of rows related to the current row without collapsing rows; ROW_NUMBER() assigns a unique sequential number, while RANK() gives the same rank to ties and skips subsequent numbers. Example: SELECT id, value, ROW_NUMBER() OVER (ORDER BY value DESC) AS rn, RANK() OVER (ORDER BY value DESC) AS rnk FROM tbl;",
+    "tags": [
+      "window functions",
+      "ranking"
+    ]
+  },
+  {
+    "id": "da-sql-006",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "Compare using a subquery versus a Common Table Expression (CTE) for intermediate results; when might a CTE be preferred?",
+    "reference_answer": "Both isolate intermediate logic, but a CTE is defined before the main query, improves readability, and can be referenced multiple times; it\u2019s preferred for complex, recursive, or multi-step transformations, whereas subqueries are inline and may be simpler for single-use calculations.",
+    "tags": [
+      "subqueries",
+      "CTE"
+    ]
+  },
+  {
+    "id": "da-sql-007",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "Explain the difference between a correlated subquery and a regular subquery, and give an example where a correlated subquery is necessary for correct results.",
+    "reference_answer": "A correlated subquery references columns from the outer query, so it is re\u2011evaluated for each outer row, whereas a regular subquery is evaluated once; for example, selecting employees whose salary exceeds the average salary of their department requires a correlated subquery referencing the department column.",
+    "tags": [
+      "subquery",
+      "correlation"
+    ]
+  },
+  {
+    "id": "da-sql-008",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "How does the optimizer decide between an index scan and a full table scan, and what role do statistics play in that decision?",
+    "reference_answer": "The optimizer estimates row counts using column statistics; if the estimated selectivity is low and the index is selective, it prefers an index scan, otherwise it may choose a full table scan, and you can influence the plan by updating statistics or using index hints.",
+    "tags": [
+      "optimizer",
+      "statistics",
+      "index"
+    ]
+  },
+  {
+    "id": "da-sql-009",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "Write a query to return the top three customers by total revenue in the last quarter, handling ties correctly, using window functions.",
+    "reference_answer": "Use SUM(revenue) over the quarter per customer, then apply ROW_NUMBER() or RANK() in a CTE and filter where rank <= 3 to include ties; e.g., SELECT customer_id,total FROM (SELECT customer_id,SUM(revenue) AS total, RANK() OVER (ORDER BY SUM(revenue) DESC) AS r FROM sales WHERE sale_date BETWEEN ... GROUP BY customer_id) t WHERE r <= 3;",
+    "tags": [
+      "window-functions",
+      "ranking",
+      "aggregation"
+    ]
+  },
+  {
+    "id": "da-sql-010",
+    "role": "data analyst",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "Describe how to implement a Slowly Changing Dimension Type 2 in a relational database, including the SQL statements needed to insert a new version of a dimension record.",
+    "reference_answer": "Create the dimension table with columns for surrogate key, natural key, attribute columns, effective_start, effective_end, and a current_flag; when a change occurs, INSERT a new row with a new surrogate key, set effective_start to today, effective_end to a high date, current_flag='Y', and UPDATE the previous row to set effective_end to yesterday and current_flag='N'.",
+    "tags": [
+      "SCD",
+      "dimensional-modeling",
+      "ETL"
+    ]
+  },
+  {
+    "id": "da-statistics-001",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "easy",
+    "question": "What is the difference between a population and a sample?",
+    "reference_answer": "A population includes every member of the group being studied, while a sample is a subset selected to represent the population and allow estimation of its characteristics.",
+    "tags": [
+      "population",
+      "sample",
+      "estimation"
+    ]
+  },
+  {
+    "id": "da-statistics-002",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "easy",
+    "question": "Explain what a p\u2011value represents in hypothesis testing.",
+    "reference_answer": "A p\u2011value is the probability of obtaining results at least as extreme as those observed, assuming the null hypothesis is true; a small p\u2011value suggests evidence against the null.",
+    "tags": [
+      "p\u2011value",
+      "hypothesis testing",
+      "significance"
+    ]
+  },
+  {
+    "id": "da-statistics-003",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "easy",
+    "question": "Define mean, median, and mode and when each measure is appropriate.",
+    "reference_answer": "The mean is the arithmetic average, the median is the middle value when data are ordered, and the mode is the most frequent value; the mean is useful for symmetric data, the median for skewed data, and the mode for categorical or multimodal data.",
+    "tags": [
+      "central tendency",
+      "mean",
+      "median"
+    ]
+  },
+  {
+    "id": "da-statistics-004",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "easy",
+    "question": "What is the purpose of a confidence interval?",
+    "reference_answer": "A confidence interval provides a range of plausible values for a population parameter, calculated from sample data, with a specified confidence level (e.g., 95%).",
+    "tags": [
+      "confidence interval",
+      "estimation",
+      "statistics"
+    ]
+  },
+  {
+    "id": "da-statistics-005",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "medium",
+    "question": "Explain the Central Limit Theorem and why it is important for hypothesis testing.",
+    "reference_answer": "The Central Limit Theorem states that the sampling distribution of the mean approaches a normal distribution as the sample size grows, regardless of the population's shape, provided the samples are independent and identically distributed. This allows analysts to use normal\u2011based confidence intervals and p\u2011values even when the underlying data are not normal.",
+    "tags": [
+      "central limit theorem",
+      "hypothesis testing",
+      "sampling"
+    ]
+  },
+  {
+    "id": "da-statistics-006",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "medium",
+    "question": "How would you detect and address multicollinearity in a linear regression model?",
+    "reference_answer": "Multicollinearity can be detected using variance inflation factors (VIF) or correlation matrices; VIF values above 5\u201310 suggest problematic redundancy. To address it, you can remove or combine correlated predictors, apply regularization techniques like ridge regression, or use principal component analysis.",
+    "tags": [
+      "multicollinearity",
+      "regression",
+      "feature engineering"
+    ]
+  },
+  {
+    "id": "da-statistics-007",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "medium",
+    "question": "Differentiate between Type I and Type II errors in statistical inference.",
+    "reference_answer": "A Type I error occurs when a true null hypothesis is incorrectly rejected (false positive), while a Type II error happens when a false null hypothesis fails to be rejected (false negative). The significance level (\u03b1) controls the probability of a Type I error, whereas the test's power (1\u2011\u03b2) relates to the probability of avoiding a Type II error.",
+    "tags": [
+      "type I error",
+      "type II error",
+      "statistical inference"
+    ]
+  },
+  {
+    "id": "da-statistics-008",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "medium",
+    "question": "What is the purpose of A/B testing and how do you determine the necessary sample size?",
+    "reference_answer": "A/B testing compares two variants to identify which yields a better metric, using controlled experiments to isolate the effect of the change. Sample size is calculated via power analysis, specifying desired significance level, power, and the minimum detectable effect; formulas or calculators then provide the required number of observations per group.",
+    "tags": [
+      "A/B testing",
+      "sample size",
+      "power analysis"
+    ]
+  },
+  {
+    "id": "da-statistics-009",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "hard",
+    "question": "Derive the formula for the variance of a linear combination of random variables and explain how covariances affect it.",
+    "reference_answer": "Var(aX+bY)=a^2Var(X)+b^2Var(Y)+2abCov(X,Y); the covariance term adds positively if variables are positively correlated and subtracts if negatively correlated, altering the total variance.",
+    "tags": [
+      "variance",
+      "covariance",
+      "linear_combination"
+    ]
+  },
+  {
+    "id": "da-statistics-010",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "hard",
+    "question": "Explain the likelihood ratio test, its asymptotic distribution, and when it is appropriate for comparing nested models.",
+    "reference_answer": "The likelihood ratio test compares the maximum likelihoods of two nested models; under regularity conditions, -2\u00b7log(likelihood ratio) follows a chi\u2011square distribution with degrees of freedom equal to the difference in parameter counts, making it suitable for nested model comparison.",
+    "tags": [
+      "likelihood_ratio",
+      "nested_models",
+      "chi_square"
+    ]
+  },
+  {
+    "id": "da-statistics-011",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "hard",
+    "question": "Describe the delta method and illustrate how it approximates the variance of a transformed estimator.",
+    "reference_answer": "The delta method uses a first-order Taylor expansion: if \u221an(\u03b8\u0302-\u03b8)\u2192N(0,\u03c3\u00b2), then \u221an(g(\u03b8\u0302)-g(\u03b8))\u2192N(0,(g'(\u03b8))\u00b2\u03c3\u00b2); for example, Var[log(\u03b8\u0302)]\u2248(1/\u03b8)\u00b2Var(\u03b8\u0302).",
+    "tags": [
+      "delta_method",
+      "asymptotic",
+      "variance"
+    ]
+  },
+  {
+    "id": "da-statistics-012",
+    "role": "data analyst",
+    "topic": "statistics",
+    "difficulty": "hard",
+    "question": "Compare the Bonferroni correction and the Benjamini\u2011Hochberg procedure for multiple hypothesis testing in terms of error control and statistical power.",
+    "reference_answer": "Bonferroni controls the family\u2011wise error rate and is very conservative, often reducing power, whereas Benjamini\u2011Hochberg controls the false discovery rate, allowing more rejections and higher power while tolerating a controlled proportion of false positives.",
+    "tags": [
+      "multiple_testing",
+      "bonferroni",
+      "benjamini_hochberg"
+    ]
+  },
+  {
+    "id": "da-datavisualization-001",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "easy",
+    "question": "What are the key differences between a bar chart and a line chart, and when would you use each?",
+    "reference_answer": "Bar charts compare categorical values across groups, while line charts display trends over a continuous variable such as time. Use bar charts for discrete comparisons and line charts to highlight changes over time.",
+    "tags": [
+      "chart types",
+      "best practices"
+    ]
+  },
+  {
+    "id": "da-datavisualization-002",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "easy",
+    "question": "Name two common data visualization libraries in Python and a primary feature of each.",
+    "reference_answer": "Matplotlib offers low\u2011level control for creating static plots, whereas Seaborn builds on Matplotlib and provides high\u2011level functions for statistical visualizations.",
+    "tags": [
+      "Python",
+      "libraries"
+    ]
+  },
+  {
+    "id": "da-datavisualization-003",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "easy",
+    "question": "Explain why it is important to label axes and include a legend in a visualization.",
+    "reference_answer": "Axes labels and legends give essential context about what is being measured and the meaning of colors or symbols, preventing misinterpretation of the data.",
+    "tags": [
+      "design",
+      "clarity"
+    ]
+  },
+  {
+    "id": "da-datavisualization-004",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "easy",
+    "question": "What is a heatmap and what kind of data is it best suited for?",
+    "reference_answer": "A heatmap uses color intensity to represent values in a matrix, making it ideal for visualizing correlation matrices or frequency distributions across two dimensions.",
+    "tags": [
+      "heatmap",
+      "use cases"
+    ]
+  },
+  {
+    "id": "da-datavisualization-005",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "medium",
+    "question": "Explain the difference between a heatmap and a scatter plot, and when you would choose each.",
+    "reference_answer": "A heatmap visualizes data density or magnitude across two dimensions using color intensity, ideal for showing patterns in large matrices, whereas a scatter plot displays individual observations as points to reveal relationships between two numeric variables. Choose a heatmap for aggregated or matrix-like data and a scatter plot for exploring correlations.",
+    "tags": [
+      "heatmap",
+      "scatter plot",
+      "use case"
+    ]
+  },
+  {
+    "id": "da-datavisualization-006",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "medium",
+    "question": "What is the purpose of using a logarithmic scale on an axis, and how does it affect interpretation of the data?",
+    "reference_answer": "A logarithmic scale compresses large ranges, making multiplicative changes appear linear, which helps visualize exponential growth or data spanning several orders of magnitude. It changes interpretation by emphasizing relative, not absolute, differences.",
+    "tags": [
+      "log scale",
+      "axis",
+      "interpretation"
+    ]
+  },
+  {
+    "id": "da-datavisualization-007",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "medium",
+    "question": "Describe how you would assess whether a chart suffers from misleading visual encoding, and give an example.",
+    "reference_answer": "Check if the visual encoding (e.g., length, area, color) proportionally represents the underlying values; mismatched scaling or truncated axes can mislead. For example, a bar chart with a y-axis starting at 90 hides small differences between bars.",
+    "tags": [
+      "misleading",
+      "visual encoding",
+      "best practices"
+    ]
+  },
+  {
+    "id": "da-datavisualization-008",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "medium",
+    "question": "When would you prefer a box plot over a violin plot, and what information does each convey?",
+    "reference_answer": "A box plot succinctly shows median, quartiles, and outliers, making it suitable for quick comparisons across groups; a violin plot adds a kernel density estimate to display the full distribution shape. Use a box plot when simplicity is needed, and a violin plot when distribution details matter.",
+    "tags": [
+      "box plot",
+      "violin plot",
+      "distribution"
+    ]
+  },
+  {
+    "id": "da-datavisualization-009",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "hard",
+    "question": "Explain the difference between a stacked bar chart and a 100% stacked bar chart, and when each is appropriate.",
+    "reference_answer": "A stacked bar chart displays absolute values for each category, while a 100% stacked bar chart normalizes each stack to sum to 100%, showing relative proportions; use stacked bars to compare totals and 100% stacked bars to compare composition across groups.",
+    "tags": [
+      "chart types",
+      "interpretation"
+    ]
+  },
+  {
+    "id": "da-datavisualization-010",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "hard",
+    "question": "How would you decide between a heatmap and a scatter plot for visualizing a large matrix of correlation coefficients?",
+    "reference_answer": "A heatmap encodes the entire correlation matrix with color, making it ideal for many variables, whereas a scatter plot shows pairwise relationships and becomes cluttered with large matrices; thus choose a heatmap for dense, high\u2011dimensional data and a scatter plot for a limited set of variable pairs.",
+    "tags": [
+      "visualization choice",
+      "correlation"
+    ]
+  },
+  {
+    "id": "da-datavisualization-011",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "hard",
+    "question": "Describe how you would handle overplotting in a scatter plot with millions of points, and name two techniques.",
+    "reference_answer": "To mitigate overplotting you can apply alpha blending to make points semi\u2011transparent and use binning methods such as hexbin or 2D histograms to aggregate points into cells, both of which preserve overall density patterns.",
+    "tags": [
+      "overplotting",
+      "techniques"
+    ]
+  },
+  {
+    "id": "da-datavisualization-012",
+    "role": "data analyst",
+    "topic": "data visualization",
+    "difficulty": "hard",
+    "question": "What are the principles behind choosing an appropriate color palette for a diverging dataset, and why is perceptual uniformity important?",
+    "reference_answer": "A diverging palette should have a neutral midpoint color, contrasting hues for the extremes, and be color\u2011blind friendly; perceptual uniformity ensures that equal steps in data value correspond to equal visual differences, preventing misinterpretation of magnitude.",
+    "tags": [
+      "color theory",
+      "accessibility"
+    ]
+  },
+  {
+    "id": "da-excel-001",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "easy",
+    "question": "What does the VLOOKUP function do in Excel?",
+    "reference_answer": "VLOOKUP searches for a value in the first column of a range and returns a value from a specified column in the same row.",
+    "tags": [
+      "lookup",
+      "function"
+    ]
+  },
+  {
+    "id": "da-excel-002",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "easy",
+    "question": "How can you quickly sum a column of numbers?",
+    "reference_answer": "Select the cell below the column and press Alt+= to insert the SUM function, which adds all numbers above it.",
+    "tags": [
+      "sum",
+      "shortcut"
+    ]
+  },
+  {
+    "id": "da-excel-003",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "easy",
+    "question": "What is the purpose of using filters in a worksheet?",
+    "reference_answer": "Filters allow you to display only rows that meet certain criteria, making it easier to analyze subsets of data.",
+    "tags": [
+      "filter",
+      "analysis"
+    ]
+  },
+  {
+    "id": "da-excel-004",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "easy",
+    "question": "How do you freeze the top row of a worksheet?",
+    "reference_answer": "Go to the View tab and select Freeze Panes \u2192 Freeze Top Row, which keeps the top row visible while scrolling.",
+    "tags": [
+      "view",
+      "navigation"
+    ]
+  },
+  {
+    "id": "da-excel-005",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "medium",
+    "question": "How would you use XLOOKUP (or VLOOKUP) to combine data from two tables based on a common key?",
+    "reference_answer": "Use XLOOKUP by specifying the lookup value, the lookup array from the source table, and the return array from the target table; set the match mode to exact and optionally provide a default value for missing matches. With VLOOKUP, place the key column as the leftmost column, choose the column index of the value to retrieve, and set the range_lookup argument to FALSE for an exact match.",
+    "tags": [
+      "lookup",
+      "functions",
+      "data\u2011merging"
+    ]
+  },
+  {
+    "id": "da-excel-006",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "medium",
+    "question": "Explain the steps to create a pivot table that summarizes monthly sales by region and product, and how to add a calculated field for profit margin.",
+    "reference_answer": "Insert a pivot table, drag Region and Product to the Rows area, Month to the Columns area, and Sales and Cost to the Values area; then use the PivotTable Tools to add a calculated field that divides (Sales\u2011Cost) by Sales to compute profit margin, formatting it as a percentage.",
+    "tags": [
+      "pivot",
+      "summarization",
+      "calculated\u2011fields"
+    ]
+  },
+  {
+    "id": "da-excel-007",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "medium",
+    "question": "Describe how to apply conditional formatting to highlight outliers that are more than two standard deviations from the mean in a numeric column.",
+    "reference_answer": "Select the column, choose Conditional Formatting \u2192 New Rule \u2192 Use a formula, and enter a formula like =ABS(A2-AVERAGE($A$2:$A$100))>2*STDEV.P($A$2:$A$100); then set a distinct fill color to flag those cells.",
+    "tags": [
+      "conditional\u2011formatting",
+      "visualization",
+      "outliers"
+    ]
+  },
+  {
+    "id": "da-excel-008",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "medium",
+    "question": "How can Power Query be used to automate repetitive data\u2011cleaning tasks such as removing duplicate rows, splitting full names into first and last, and changing date formats?",
+    "reference_answer": "In Power Query, import the source, use the Remove Duplicates command on relevant columns, apply the Split Column by Delimiter on the full name field to create first and last name columns, and change the data type of the date column with the Transform \u2192 Data Type menu; then click Close & Load to apply the steps automatically each refresh.",
+    "tags": [
+      "power\u2011query",
+      "automation",
+      "data\u2011cleaning"
+    ]
+  },
+  {
+    "id": "da-excel-009",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "hard",
+    "question": "Explain how to use Power Query to combine multiple CSV files with differing schemas, and how to handle mismatched columns.",
+    "reference_answer": "Import the folder as a source, use the Combine Files function, then apply a custom transformation that promotes headers, adds missing columns with null values, and aligns data types before loading.",
+    "tags": [
+      "Power Query",
+      "Data Integration"
+    ]
+  },
+  {
+    "id": "da-excel-010",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "hard",
+    "question": "Describe a dynamic array formula that returns the top N values per category without helper columns.",
+    "reference_answer": "Use SORT(FILTER(data,category=criteria),value,-1) combined with SEQUENCE(N) inside an INDEX to spill the top N values for each category.",
+    "tags": [
+      "Dynamic Arrays",
+      "Formulas"
+    ]
+  },
+  {
+    "id": "da-excel-011",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "hard",
+    "question": "How do you create a pivot table that shows month\u2011over\u2011month growth percentages and ensure correct date grouping?",
+    "reference_answer": "Group the date field by months, add a calculated field that computes (CurrentMonth\u2011PreviousMonth)/PreviousMonth, and format the field as a percentage to display MoM growth.",
+    "tags": [
+      "Pivot Table",
+      "Time Series"
+    ]
+  },
+  {
+    "id": "da-excel-012",
+    "role": "data analyst",
+    "topic": "Excel",
+    "difficulty": "hard",
+    "question": "Detail the steps to write a VBA macro that automates generating a monthly report, including copying data, applying formatting, and emailing the file.",
+    "reference_answer": "The macro should open the source workbook, copy the required range, paste values into a new report sheet, apply desired styles, save the report, create an Outlook MailItem, attach the file, and send it automatically.",
+    "tags": [
+      "VBA",
+      "Automation"
+    ]
+  },
+  {
+    "id": "da-python-001",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "How do you read a CSV file into a pandas DataFrame?",
+    "reference_answer": "Use pandas.read_csv('filename.csv') which returns a DataFrame containing the CSV data.",
+    "tags": [
+      "pandas",
+      "CSV",
+      "DataFrame"
+    ]
+  },
+  {
+    "id": "da-python-002",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "How can you handle missing values in a pandas DataFrame?",
+    "reference_answer": "Detect missing values with df.isnull() and handle them using df.fillna() to replace or df.dropna() to remove rows/columns.",
+    "tags": [
+      "missing values",
+      "pandas",
+      "cleaning"
+    ]
+  },
+  {
+    "id": "da-python-003",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "Explain the purpose of the groupby() function in pandas.",
+    "reference_answer": "groupby() splits the DataFrame into groups based on one or more keys, enabling aggregate operations like sum, mean, or count on each group.",
+    "tags": [
+      "groupby",
+      "aggregation",
+      "pandas"
+    ]
+  },
+  {
+    "id": "da-python-004",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "How would you handle missing data in a pandas DataFrame?",
+    "reference_answer": "You can identify missing values with isnull(), then either fill them using fillna() with a constant or an aggregation, or remove them with dropna() depending on the analysis needs.",
+    "tags": [
+      "pandas",
+      "missing-data"
+    ]
+  },
+  {
+    "id": "da-python-005",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "Explain the difference between apply, map, and applymap in pandas.",
+    "reference_answer": "apply works on a DataFrame axis (rows or columns) applying a function to each series, map works on a Series element\u2011wise using a dict or function, and applymap applies a function element\u2011wise to every cell in a DataFrame.",
+    "tags": [
+      "pandas",
+      "functions"
+    ]
+  },
+  {
+    "id": "da-python-006",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "Describe how you would merge two large datasets efficiently and what types of joins are available.",
+    "reference_answer": "Use pandas.merge() or the join method, specifying the key columns and join type\u2014inner, left, right, or outer\u2014to combine the datasets while leveraging indexed columns for speed.",
+    "tags": [
+      "pandas",
+      "joins"
+    ]
+  },
+  {
+    "id": "da-python-007",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "How can you improve the performance of a Python loop processing a large dataset?",
+    "reference_answer": "Replace the loop with vectorized pandas or NumPy operations, use list comprehensions, or employ tools like Cython, Numba, or multiprocessing to parallelize the work.",
+    "tags": [
+      "performance",
+      "optimization"
+    ]
+  },
+  {
+    "id": "da-python-008",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "Explain the difference between Python's copy.deepcopy and pandas.DataFrame.copy(deep=True) and when each should be used in a data\u2011analysis workflow.",
+    "reference_answer": "copy.deepcopy creates a full independent copy of the entire Python object graph, including any custom objects attached to a DataFrame, while DataFrame.copy(deep=True) copies the underlying data buffer but may share underlying NumPy arrays for certain dtypes; use deepcopy only when you need to duplicate non\u2011standard attributes, otherwise DataFrame.copy is faster and uses less memory.",
+    "tags": [
+      "pandas",
+      "copy",
+      "memory"
+    ]
+  },
+  {
+    "id": "da-python-009",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "How does the Global Interpreter Lock (GIL) affect multi\u2011threaded data processing in Python, and what techniques can a data analyst use to achieve true parallelism for CPU\u2011bound tasks?",
+    "reference_answer": "The GIL allows only one native thread to execute Python bytecode at a time, which limits CPU\u2011bound parallelism; data analysts can bypass this limitation by using multiprocessing (e.g., ProcessPoolExecutor), joblib's parallel backend, or C\u2011extensions that release the GIL for heavy numeric work.",
+    "tags": [
+      "GIL",
+      "parallelism",
+      "multithreading"
+    ]
+  },
+  {
+    "id": "da-python-010",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "Write a memory\u2011efficient generator expression that streams rows from a large CSV file and yields only those where the numeric column \"value\" is at or above the 95th percentile, without loading the entire file into memory.",
+    "reference_answer": "First compute the 95th percentile on a small random sample, then use pandas.read_csv with a chunksize and a generator: `threshold = sample['value'].quantile(0.95); for chunk in pd.read_csv(path, chunksize=10000): for _, row in chunk.iterrows(): if row['value'] >= threshold: yield row`; this streams and filters rows on the fly.",
+    "tags": [
+      "generator",
+      "memory",
+      "pandas"
+    ]
+  },
+  {
+    "id": "da-python-011",
+    "role": "data analyst",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "Describe how to create a custom pandas DataFrame accessor named `my_stats` that returns a dictionary of summary statistics for numeric columns, and explain how it integrates with pandas' extension API.",
+    "reference_answer": "Define a class with `__init__(self, pandas_obj)` and a method `my_stats(self)` that computes `self._obj.select_dtypes(include='number').describe().to_dict()`, then register it using `@pd.api.extensions.register_dataframe_accessor('my_stats')`; pandas then adds the `my_stats` attribute to every DataFrame instance.",
+    "tags": [
+      "pandas",
+      "accessor",
+      "extension"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-001",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "easy",
+    "question": "What is the difference between supervised and unsupervised learning?",
+    "reference_answer": "Supervised learning trains models on labeled data to predict outcomes, whereas unsupervised learning finds structure in unlabeled data without explicit targets.",
+    "tags": [
+      "supervised",
+      "unsupervised"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-002",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "easy",
+    "question": "What is overfitting and how can it be mitigated?",
+    "reference_answer": "Overfitting occurs when a model captures noise instead of the underlying pattern, leading to poor generalization; it can be mitigated with techniques like regularization, pruning, or using more data.",
+    "tags": [
+      "overfitting",
+      "regularization"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-003",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "easy",
+    "question": "Explain the purpose of a confusion matrix in classification tasks.",
+    "reference_answer": "A confusion matrix summarizes prediction results by showing true positives, false positives, true negatives, and false negatives, helping evaluate metrics such as precision and recall.",
+    "tags": [
+      "confusion matrix",
+      "evaluation"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-004",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "easy",
+    "question": "What is cross-validation and why is it used?",
+    "reference_answer": "Cross-validation partitions data into multiple training and validation folds to assess model performance more reliably and reduce variance compared to a single train-test split.",
+    "tags": [
+      "cross-validation",
+      "model assessment"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-005",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "medium",
+    "question": "Explain the bias-variance tradeoff and how it influences model selection.",
+    "reference_answer": "The bias-variance tradeoff describes the balance between error from erroneous assumptions (bias) and error from sensitivity to fluctuations in the training data (variance); a model with high bias underfits, while high variance overfits, so selecting a model involves finding a point that minimizes total expected error.",
+    "tags": [
+      "bias-variance",
+      "model selection",
+      "generalization"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-006",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "medium",
+    "question": "How does regularization help prevent overfitting in linear models? Provide common techniques.",
+    "reference_answer": "Regularization adds a penalty to the loss function that discourages large coefficients, effectively shrinking them toward zero; common techniques include L1 (lasso) which can produce sparse models and L2 (ridge) which distributes shrinkage across all features.",
+    "tags": [
+      "regularization",
+      "lasso",
+      "ridge"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-007",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "medium",
+    "question": "Describe the difference between bagging and boosting ensemble methods.",
+    "reference_answer": "Bagging builds multiple independent models on bootstrapped subsets of data and aggregates their predictions (e.g., random forest) to reduce variance, whereas boosting trains models sequentially, each focusing on errors of the previous one, aiming to reduce bias and improve accuracy (e.g., AdaBoost, Gradient Boosting).",
+    "tags": [
+      "bagging",
+      "boosting",
+      "ensemble"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-008",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "medium",
+    "question": "What is the purpose of cross\u2011validation, and why is stratified k\u2011fold preferred for classification problems?",
+    "reference_answer": "Cross\u2011validation estimates a model\u2019s performance on unseen data by repeatedly training and testing on different splits; stratified k\u2011fold maintains the class distribution in each fold, providing more reliable error estimates for imbalanced classification tasks.",
+    "tags": [
+      "cross-validation",
+      "stratified",
+      "classification"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-009",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "hard",
+    "question": "Explain the bias\u2011variance trade\u2011off in the context of ensemble methods and how stacking can mitigate it.",
+    "reference_answer": "Stacking combines diverse base learners so that their errors, which are often uncorrelated, average out, reducing variance while preserving low bias from strong learners, thus moving the model toward the optimal bias\u2011variance balance.",
+    "tags": [
+      "bias-variance",
+      "ensemble",
+      "stacking"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-010",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "hard",
+    "question": "Derive the parameter update rule for the Adam optimizer and discuss its convergence properties relative to SGD with momentum.",
+    "reference_answer": "Adam computes biased\u2011corrected first and second moment estimates (m_t and v_t) of the gradients and updates parameters via \u03b8_{t+1}=\u03b8_t-\u03b1\u00b7(m\u0302_t)/(\u221a(v\u0302_t)+\u03b5); under standard assumptions it converges faster than SGD with momentum on noisy, sparse gradients but may fail to reach the exact optimum without careful learning\u2011rate decay.",
+    "tags": [
+      "optimizer",
+      "Adam",
+      "convergence"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-011",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "hard",
+    "question": "Describe identifiability issues in latent\u2011variable models such as variational autoencoders and how they can lead to posterior collapse.",
+    "reference_answer": "Because the decoder can ignore the latent code, many latent configurations produce the same data distribution, making the model non\u2011identifiable; this can cause the variational posterior to collapse to the prior, especially when the decoder is overly powerful.",
+    "tags": [
+      "latent-variable",
+      "VAE",
+      "posterior-collapse"
+    ]
+  },
+  {
+    "id": "ds-machinelearning-012",
+    "role": "data scientist",
+    "topic": "machine learning",
+    "difficulty": "hard",
+    "question": "How does the choice of kernel function affect the representational capacity of Gaussian Process regression, and what are the computational trade\u2011offs of using a deep kernel?",
+    "reference_answer": "A kernel determines the smoothness and stationarity of functions the GP can model; richer kernels (e.g., spectral mixture or deep kernels) capture complex patterns but increase hyper\u2011parameter dimensionality and require costly kernel matrix operations, often mitigated by approximations like inducing points.",
+    "tags": [
+      "kernel",
+      "Gaussian-Process",
+      "deep-kernel"
+    ]
+  },
+  {
+    "id": "ds-statistics-001",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "easy",
+    "question": "What is the difference between descriptive and inferential statistics?",
+    "reference_answer": "Descriptive statistics summarize data using measures like mean and standard deviation, while inferential statistics draw conclusions about a population from a sample using techniques such as hypothesis testing.",
+    "tags": [
+      "descriptive",
+      "inferential"
+    ]
+  },
+  {
+    "id": "ds-statistics-002",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "easy",
+    "question": "Explain the concept of a p-value in hypothesis testing.",
+    "reference_answer": "A p-value is the probability of observing data at least as extreme as the observed results, assuming the null hypothesis is true; a small p-value indicates evidence against the null hypothesis.",
+    "tags": [
+      "p-value",
+      "hypothesis testing"
+    ]
+  },
+  {
+    "id": "ds-statistics-003",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "easy",
+    "question": "What does the Central Limit Theorem state and why is it useful?",
+    "reference_answer": "The Central Limit Theorem states that the sampling distribution of the sample mean becomes approximately normal as the sample size increases, regardless of the population distribution, allowing normal\u2011based inference.",
+    "tags": [
+      "CLT",
+      "sampling"
+    ]
+  },
+  {
+    "id": "ds-statistics-004",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "easy",
+    "question": "When would you choose a chi-square test over a t-test?",
+    "reference_answer": "A chi-square test is used for categorical data to test independence or goodness\u2011of\u2011fit, whereas a t-test compares the means of a continuous variable between two groups.",
+    "tags": [
+      "chi-square",
+      "t-test"
+    ]
+  },
+  {
+    "id": "ds-statistics-005",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "medium",
+    "question": "Explain the difference between a confidence interval and a prediction interval in the context of linear regression.",
+    "reference_answer": "A confidence interval estimates the range in which the true mean response lies for a given predictor value, whereas a prediction interval estimates the range where a new individual observation will fall, incorporating both the uncertainty of the mean estimate and the variability of individual outcomes.",
+    "tags": [
+      "confidence interval",
+      "prediction interval",
+      "linear regression"
+    ]
+  },
+  {
+    "id": "ds-statistics-006",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "medium",
+    "question": "What is the bias-variance trade\u2011off and how does it affect model performance?",
+    "reference_answer": "The bias-variance trade\u2011off describes the balance between error from erroneous assumptions (bias) and error from sensitivity to fluctuations in the training data (variance); optimal model performance is achieved by minimizing the total expected error, which is the sum of bias\u00b2, variance, and irreducible error.",
+    "tags": [
+      "bias",
+      "variance",
+      "model evaluation"
+    ]
+  },
+  {
+    "id": "ds-statistics-007",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "medium",
+    "question": "How does the Central Limit Theorem justify using normal approximations for sample means?",
+    "reference_answer": "The Central Limit Theorem states that, regardless of the population distribution, the sampling distribution of the sample mean approaches a normal distribution as the sample size grows, typically becoming a good approximation for n\u202f\u2265\u202f30, enabling the use of normal\u2011based inference.",
+    "tags": [
+      "central limit theorem",
+      "sampling distribution",
+      "normal approximation"
+    ]
+  },
+  {
+    "id": "ds-statistics-008",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "medium",
+    "question": "When would you prefer a non\u2011parametric test over a parametric test, and give an example?",
+    "reference_answer": "A non\u2011parametric test is preferred when data violate parametric assumptions such as normality or homoscedasticity; for example, the Mann\u2011Whitney U test can replace a two\u2011sample t\u2011test when the groups have skewed distributions.",
+    "tags": [
+      "non\u2011parametric",
+      "Mann\u2011Whitney",
+      "assumption violation"
+    ]
+  },
+  {
+    "id": "ds-statistics-009",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "hard",
+    "question": "Explain the bias\u2011variance tradeoff in model evaluation and its relationship to overfitting and underfitting.",
+    "reference_answer": "Bias reflects error from erroneous assumptions, while variance reflects error from sensitivity to fluctuations in the training data; high bias leads to underfitting, high variance leads to overfitting, and the optimal model balances the two.",
+    "tags": [
+      "bias-variance",
+      "model-evaluation",
+      "overfitting"
+    ]
+  },
+  {
+    "id": "ds-statistics-010",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "hard",
+    "question": "Derive the maximum likelihood estimators for the mean vector and covariance matrix of a multivariate Gaussian distribution given i.i.d. samples.",
+    "reference_answer": "Setting the gradient of the log\u2011likelihood to zero yields the sample mean \u03bc\u0302 = (1/n)\u2211x_i as the MLE for the mean and the sample covariance \u03a3\u0302 = (1/n)\u2211(x_i\u2011\u03bc\u0302)(x_i\u2011\u03bc\u0302)^T as the MLE for the covariance matrix.",
+    "tags": [
+      "MLE",
+      "multivariate-gaussian",
+      "estimation"
+    ]
+  },
+  {
+    "id": "ds-statistics-011",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "hard",
+    "question": "How would you test for stationarity in a time series, and why is stationarity crucial for ARIMA modeling?",
+    "reference_answer": "Apply unit\u2011root tests such as the Augmented Dickey\u2011Fuller or KPSS test; stationarity ensures that ARIMA parameters are constant over time and that the model\u2019s statistical properties (mean, variance) remain stable for reliable forecasting.",
+    "tags": [
+      "stationarity",
+      "time-series",
+      "ARIMA"
+    ]
+  },
+  {
+    "id": "ds-statistics-012",
+    "role": "data scientist",
+    "topic": "statistics",
+    "difficulty": "hard",
+    "question": "Discuss the bootstrap method and how it can be used to construct confidence intervals for a statistic when the underlying distribution is unknown.",
+    "reference_answer": "The bootstrap repeatedly resamples the observed data with replacement to generate an empirical distribution of the statistic, from which percentile or bias\u2011corrected confidence intervals can be derived without assuming a parametric form.",
+    "tags": [
+      "bootstrap",
+      "confidence-interval",
+      "resampling"
+    ]
+  },
+  {
+    "id": "ds-python-001",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "Explain the purpose of the \"if __name__ == '__main__'\" idiom in a Python script.",
+    "reference_answer": "It ensures that code block runs only when the script is executed directly, not when imported as a module.",
+    "tags": [
+      "__main__",
+      "script",
+      "module"
+    ]
+  },
+  {
+    "id": "ds-python-002",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "easy",
+    "question": "What does the .apply() method do in pandas?",
+    "reference_answer": "It applies a given function to each element or row/column of a DataFrame or Series, returning the transformed data.",
+    "tags": [
+      "apply",
+      "pandas",
+      "function"
+    ]
+  },
+  {
+    "id": "ds-python-003",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "Explain the difference between a list comprehension and a generator expression in Python, and when you would choose each for data processing tasks.",
+    "reference_answer": "A list comprehension builds the entire list in memory, while a generator expression returns an iterator that yields items lazily, saving memory for large datasets. Use a generator when you need lazy evaluation or streaming data; use a list comprehension when you need to reuse the full collection multiple times.",
+    "tags": [
+      "list comprehension",
+      "generator",
+      "memory"
+    ]
+  },
+  {
+    "id": "ds-python-004",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "How does the Pandas `apply` method work, and what are the performance implications compared to using vectorized operations?",
+    "reference_answer": "`apply` invokes a Python function along a DataFrame or Series axis, allowing custom logic, but it is slower than built\u2011in vectorized methods because it operates in Python loops. Prefer vectorized functions for speed and resort to `apply` only when no vectorized alternative exists.",
+    "tags": [
+      "pandas",
+      "apply",
+      "performance"
+    ]
+  },
+  {
+    "id": "ds-python-005",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "What is the Global Interpreter Lock (GIL) in Python, and how does it affect parallelism for CPU\u2011bound data\u2011science workloads?",
+    "reference_answer": "The GIL allows only one thread to execute Python bytecode at a time, preventing true multithreading for CPU\u2011bound code; I/O\u2011bound tasks can still benefit, and multiprocessing or C extensions can achieve real parallelism. Data scientists often use the `multiprocessing` module or libraries like Dask to work around the GIL.",
+    "tags": [
+      "GIL",
+      "multithreading",
+      "multiprocessing"
+    ]
+  },
+  {
+    "id": "ds-python-006",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "medium",
+    "question": "Describe the proper way to serialize a trained scikit\u2011learn model for later use and any security considerations involved.",
+    "reference_answer": "Use `joblib.dump` (or `pickle.dump`) to write the model to disk and `joblib.load` to restore it; however, unpickling data from untrusted sources can execute arbitrary code, so only load models from trusted origins.",
+    "tags": [
+      "serialization",
+      "scikit-learn",
+      "security"
+    ]
+  },
+  {
+    "id": "ds-python-007",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "Explain how Python's GIL affects multi-threaded data processing and how you would mitigate its impact in a CPU-bound task.",
+    "reference_answer": "The GIL allows only one thread to execute Python bytecode at a time, limiting parallelism for CPU-bound code; you can mitigate it by using multiprocessing, C extensions releasing the GIL, or leveraging libraries like NumPy that release the GIL during heavy computation.",
+    "tags": [
+      "GIL",
+      "multiprocessing",
+      "performance"
+    ]
+  },
+  {
+    "id": "ds-python-008",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "Describe the differences between pandas' .apply(), .map(), and vectorized operations, and when each should be used for large datasets.",
+    "reference_answer": ".map() works element\u2011wise on a Series, .apply() can operate on rows or columns with custom functions, while vectorized operations use underlying NumPy arrays for speed; for large data, prefer vectorized code, use .map() for simple element mapping, and reserve .apply() for complex row/column logic that cannot be vectorized.",
+    "tags": [
+      "pandas",
+      "vectorization",
+      "performance"
+    ]
+  },
+  {
+    "id": "ds-python-009",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "How would you implement a custom scikit\u2011learn transformer that handles missing values and encodes categorical features without data leakage?",
+    "reference_answer": "Create a class inheriting from BaseEstimator and TransformerMixin, implement fit to learn imputation statistics and category mappings on the training split, and transform to apply those learned parameters to new data, ensuring all operations use only information from fit() to avoid leakage.",
+    "tags": [
+      "scikit-learn",
+      "custom_transformer",
+      "data_leakage"
+    ]
+  },
+  {
+    "id": "ds-python-010",
+    "role": "data scientist",
+    "topic": "Python",
+    "difficulty": "hard",
+    "question": "What are the advantages and drawbacks of using Python's generators versus loading data into memory with pandas for streaming large CSV files into a machine\u2011learning pipeline?",
+    "reference_answer": "Generators yield rows lazily, reducing memory usage and allowing processing of arbitrarily large files, but they lack the rich indexing and vectorized operations of pandas; pandas provides faster columnar operations and easier manipulation but requires enough memory to hold the dataset, making generators preferable for streaming pipelines where memory is constrained.",
+    "tags": [
+      "generators",
+      "pandas",
+      "memory"
+    ]
+  },
+  {
+    "id": "ds-sql-001",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "What does the SELECT DISTINCT clause do?",
+    "reference_answer": "SELECT DISTINCT removes duplicate rows from the result set, returning only unique records for the selected columns.",
+    "tags": [
+      "select",
+      "distinct"
+    ]
+  },
+  {
+    "id": "ds-sql-002",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "Explain the purpose of GROUP BY together with an aggregate function.",
+    "reference_answer": "GROUP BY groups rows that share a common value so that aggregate functions like COUNT, SUM, or AVG can compute summary statistics for each group.",
+    "tags": [
+      "groupby",
+      "aggregate"
+    ]
+  },
+  {
+    "id": "ds-sql-003",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "easy",
+    "question": "How can you retrieve the top 5 employees with the highest salary?",
+    "reference_answer": "Order the rows by salary in descending order and limit the output to 5 rows, e.g., SELECT * FROM employees ORDER BY salary DESC LIMIT 5 (or TOP 5 in SQL Server).",
+    "tags": [
+      "order",
+      "limit"
+    ]
+  },
+  {
+    "id": "ds-sql-004",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "Write a SQL query to retrieve the top three most frequent categories from a table named events with columns id and category.",
+    "reference_answer": "SELECT category, COUNT(*) AS freq FROM events GROUP BY category ORDER BY freq DESC LIMIT 3; This groups rows by category, counts occurrences, orders by descending frequency, and limits the result to three rows.",
+    "tags": [
+      "aggregation",
+      "ranking"
+    ]
+  },
+  {
+    "id": "ds-sql-005",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "What are window functions in SQL and how would you compute a cumulative sum of sales per customer ordered by transaction date?",
+    "reference_answer": "Window functions perform calculations across a set of rows related to the current row without collapsing the result set; for a cumulative sum you can use SUM(sales) OVER (PARTITION BY customer_id ORDER BY transaction_date ROWS UNBOUNDED PRECEDING).",
+    "tags": [
+      "window functions",
+      "analytics"
+    ]
+  },
+  {
+    "id": "ds-sql-006",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "medium",
+    "question": "Describe the purpose of indexing in a relational database and its impact on query performance and data modification operations.",
+    "reference_answer": "Indexes create auxiliary data structures (e.g., B\u2011trees) that allow the database engine to locate rows quickly, dramatically speeding up SELECT queries, but they add overhead to INSERT, UPDATE, and DELETE because the index must be maintained.",
+    "tags": [
+      "performance",
+      "indexing"
+    ]
+  },
+  {
+    "id": "ds-sql-007",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "Explain the difference between ROW_NUMBER() and RANK() window functions and give a scenario where each is appropriate in a data\u2011science analytical query.",
+    "reference_answer": "ROW_NUMBER() assigns a unique sequential number to each row within the partition, while RANK() gives the same rank to tied values and skips subsequent ranks; use ROW_NUMBER() for pagination or deduplication and RANK() when you need to identify tied top\u2011N results.",
+    "tags": [
+      "window functions",
+      "ranking",
+      "analytics"
+    ]
+  },
+  {
+    "id": "ds-sql-008",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "Write a SQL query using CTEs and a self\u2011join to find the top three most frequent pairs of items purchased together in a transaction table (columns: transaction_id, item_id).",
+    "reference_answer": "First create a CTE that aggregates item pairs per transaction, then group by the pair and order by count descending, limiting to three rows; this captures co\u2011occurrence frequency efficiently.",
+    "tags": [
+      "self join",
+      "CTE",
+      "frequency"
+    ]
+  },
+  {
+    "id": "ds-sql-009",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "Describe three techniques to optimize a query that joins a large fact table with several dimension tables, focusing on indexing, partitioning, and query hints.",
+    "reference_answer": "Create appropriate foreign\u2011key indexes on join columns, partition the fact table by a high\u2011cardinality column (e.g., date) to prune scans, and use query hints like FORCE ORDER or INDEX to guide the optimizer when statistics are misleading.",
+    "tags": [
+      "performance",
+      "indexing",
+      "partitioning"
+    ]
+  },
+  {
+    "id": "ds-sql-010",
+    "role": "data scientist",
+    "topic": "SQL",
+    "difficulty": "hard",
+    "question": "How would you implement a slowly changing dimension Type\u202f2 in SQL and write a query to retrieve the most recent version of each entity?",
+    "reference_answer": "Add effective_from and effective_to timestamps (or a current_flag) to the dimension table, inserting a new row on changes; then select rows where effective_to is NULL or the current_flag is true to get the latest version per entity.",
+    "tags": [
+      "SCD",
+      "type2",
+      "temporal"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-001",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "easy",
+    "question": "What is the purpose of a confusion matrix in classification model evaluation?",
+    "reference_answer": "It shows the counts of true positives, false positives, true negatives, and false negatives, helping you see where the model makes correct and incorrect predictions.",
+    "tags": [
+      "classification",
+      "metrics"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-002",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "easy",
+    "question": "Explain the difference between precision and recall.",
+    "reference_answer": "Precision measures the proportion of positive predictions that are correct, while recall measures the proportion of actual positives that are correctly identified.",
+    "tags": [
+      "precision",
+      "recall"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-003",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "easy",
+    "question": "When would you use RMSE versus MAE for regression evaluation?",
+    "reference_answer": "RMSE penalizes larger errors more heavily due to squaring, making it useful when large errors are especially undesirable; MAE treats all errors linearly and is more robust to outliers.",
+    "tags": [
+      "regression",
+      "error"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-004",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "easy",
+    "question": "What is cross\u2011validation and why is it used?",
+    "reference_answer": "Cross\u2011validation repeatedly splits data into training and validation sets to estimate a model's performance on unseen data and to reduce over\u2011fitting.",
+    "tags": [
+      "validation",
+      "cross-validation"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-005",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "medium",
+    "question": "Explain the difference between precision and recall and when you would prioritize one over the other.",
+    "reference_answer": "Precision measures the proportion of positive predictions that are correct, while recall measures the proportion of actual positives that are captured. You prioritize precision when false positives are costly, and recall when missing positives is more detrimental.",
+    "tags": [
+      "precision",
+      "recall",
+      "metrics"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-006",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "medium",
+    "question": "What is k-fold cross-validation and how does it help assess model performance?",
+    "reference_answer": "k-fold cross-validation splits the data into k subsets, training on k\u20111 folds and validating on the remaining fold iteratively, providing an average performance estimate that reduces variance due to a single train-test split.",
+    "tags": [
+      "cross-validation",
+      "validation",
+      "model-assessment"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-007",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "medium",
+    "question": "Describe how the bias\u2011variance tradeoff influences model evaluation and selection.",
+    "reference_answer": "A model with high bias underfits, showing systematic errors, while high variance overfits, showing large fluctuations across data splits; evaluating both training and validation errors helps identify the optimal balance.",
+    "tags": [
+      "bias-variance",
+      "overfitting",
+      "underfitting"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-008",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "medium",
+    "question": "When would you use the ROC\u2011AUC metric versus accuracy, and what are its limitations?",
+    "reference_answer": "ROC\u2011AUC evaluates ranking ability across thresholds and is useful for imbalanced classes, whereas accuracy can be misleading when class distribution is skewed; however, AUC does not reflect actual probability calibration.",
+    "tags": [
+      "roc-auc",
+      "accuracy",
+      "imbalanced-data"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-009",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "hard",
+    "question": "Explain the difference between precision\u2011recall AUC and ROC AUC, and describe scenarios where each metric is more appropriate.",
+    "reference_answer": "Precision\u2011recall AUC focuses on the trade\u2011off between true positives and false positives and is most informative when the positive class is rare, whereas ROC AUC evaluates the trade\u2011off between true positive rate and false positive rate and is suitable when class distribution is roughly balanced.",
+    "tags": [
+      "evaluation",
+      "metrics"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-010",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "hard",
+    "question": "How would you assess the calibration of a probabilistic classifier, and why is calibration important for downstream decisions?",
+    "reference_answer": "Calibration can be evaluated using reliability diagrams or the Brier score, which compare predicted probabilities to observed frequencies; good calibration ensures that probability estimates reflect true risks, which is crucial for cost\u2011sensitive or risk\u2011aware applications.",
+    "tags": [
+      "calibration",
+      "metrics"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-011",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "hard",
+    "question": "Describe the purpose and procedure of nested cross\u2011validation when tuning hyperparameters and estimating model performance.",
+    "reference_answer": "Nested cross\u2011validation uses an outer loop to estimate generalization error and an inner loop to select hyperparameters, preventing information leakage from the test folds into the tuning process and yielding an unbiased performance estimate.",
+    "tags": [
+      "cross-validation",
+      "hyperparameter\u2011tuning"
+    ]
+  },
+  {
+    "id": "ds-modelevaluation-012",
+    "role": "data scientist",
+    "topic": "model evaluation",
+    "difficulty": "hard",
+    "question": "Why can accuracy be misleading on imbalanced datasets, and what alternative evaluation strategies would you recommend?",
+    "reference_answer": "Accuracy may be high simply by predicting the majority class, obscuring poor performance on the minority class; metrics such as precision, recall, F1\u2011score, balanced accuracy, or the Matthews correlation coefficient provide a more realistic assessment.",
+    "tags": [
+      "imbalanced-data",
+      "metrics",
+      "evaluation"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-001",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "easy",
+    "question": "What is a product vision and how does it differ from a product mission?",
+    "reference_answer": "A product vision describes the long\u2011term aspirational goal of the product, while the mission defines the purpose and how the team will achieve that vision in the near term.",
+    "tags": [
+      "vision",
+      "mission",
+      "strategy"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-002",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "easy",
+    "question": "How do you prioritize features using a simple framework?",
+    "reference_answer": "A common easy framework is the RICE model\u2014Rank features by Reach, Impact, Confidence, and Effort, then calculate a score to order the backlog.",
+    "tags": [
+      "prioritization",
+      "RICE",
+      "framework"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-003",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "easy",
+    "question": "What metrics would you track to assess product\u2011market fit early on?",
+    "reference_answer": "Key early indicators include activation rate, retention (e.g., 30\u2011day retention), and Net Promoter Score (NPS) to gauge user satisfaction and repeat usage.",
+    "tags": [
+      "metrics",
+      "product\u2011market\u2011fit",
+      "KPIs"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-004",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "easy",
+    "question": "Why is competitive analysis important in shaping product strategy?",
+    "reference_answer": "Competitive analysis reveals market gaps, differentiators, and threats, helping you position the product and make informed decisions about features and pricing.",
+    "tags": [
+      "competitive\u2011analysis",
+      "positioning",
+      "strategy"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-005",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "medium",
+    "question": "How do you prioritize features when building a product roadmap?",
+    "reference_answer": "I evaluate each feature's impact on user value, alignment with business goals, and implementation effort, often using frameworks like RICE or Kano to rank them and allocate resources to the highest\u2011impact items.",
+    "tags": [
+      "prioritization",
+      "roadmap"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-006",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "medium",
+    "question": "What steps would you take to define the target market and segmentation for a new product?",
+    "reference_answer": "I start with market research to identify customer needs, then segment the market by demographics, behavior, and pain points, and finally select the segment that offers the best fit with our value proposition and growth potential.",
+    "tags": [
+      "market-research",
+      "segmentation"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-007",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "medium",
+    "question": "How do you balance short\u2011term wins with the long\u2011term product vision in your strategy?",
+    "reference_answer": "I align short\u2011term initiatives to support milestones that incrementally advance the long\u2011term vision, ensuring each quick win delivers measurable value while contributing to overarching strategic objectives.",
+    "tags": [
+      "strategy",
+      "short-term"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-008",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "medium",
+    "question": "Which metrics would you use to evaluate the success of a product strategy?",
+    "reference_answer": "Key metrics include Net Promoter Score for customer satisfaction, Monthly Active Users for engagement, and revenue growth or contribution margin to assess financial impact, all tied back to strategic goals.",
+    "tags": [
+      "metrics",
+      "KPIs"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-009",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "hard",
+    "question": "How do you balance short\u2011term revenue goals with a long\u2011term product vision when shaping the roadmap, and which metrics do you use to justify trade\u2011offs?",
+    "reference_answer": "A product manager aligns the roadmap by weighing immediate revenue targets against strategic positioning, using metrics such as LTV, CAC, and NPS to quantify the impact of each trade\u2011off.",
+    "tags": [
+      "roadmap",
+      "metrics",
+      "trade\u2011offs"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-010",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "hard",
+    "question": "When entering a new market with a platform product, what go\u2011to\u2011market strategy and network\u2011effect incentives would you prioritize to achieve sustainable growth?",
+    "reference_answer": "Successful entry starts with a beachhead segment, designing incentives for early adopters, and building API/partner ecosystems that spark network effects while addressing regulatory constraints.",
+    "tags": [
+      "market entry",
+      "network effects",
+      "ecosystem"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-011",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "hard",
+    "question": "Describe a rigorous prioritization framework you would use when resources are scarce and multiple stakeholder demands compete for attention.",
+    "reference_answer": "A rigorous approach blends RICE scoring with stakeholder impact weighting, ensuring high\u2011impact, high\u2011confidence initiatives receive funding and stay aligned with the product\u2019s strategic pillars.",
+    "tags": [
+      "prioritization",
+      "RICE",
+      "stakeholder alignment"
+    ]
+  },
+  {
+    "id": "pm-productstrategy-012",
+    "role": "product manager",
+    "topic": "product strategy",
+    "difficulty": "hard",
+    "question": "What leading and lagging indicators would you define to assess the success of a product pivot, and how would you decide when to double\u2011down or revert?",
+    "reference_answer": "Define leading indicators like adoption velocity and activation rate, and lagging indicators such as ARR and churn, with preset thresholds; if leading metrics miss targets after two sprint cycles, the pivot should be aborted.",
+    "tags": [
+      "pivot",
+      "KPIs",
+      "decision criteria"
+    ]
+  },
+  {
+    "id": "pm-metrics-001",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "easy",
+    "question": "What are the key differences between vanity metrics and actionable metrics?",
+    "reference_answer": "Vanity metrics are superficial numbers that look impressive but don\u2019t drive decisions, whereas actionable metrics directly inform product strategy and can be acted upon.",
+    "tags": [
+      "metrics",
+      "product-management",
+      "analysis"
+    ]
+  },
+  {
+    "id": "pm-metrics-002",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "easy",
+    "question": "How would you define and calculate the Net Promoter Score (NPS)?",
+    "reference_answer": "NPS is calculated as the percentage of promoters (ratings 9\u201110) minus the percentage of detractors (ratings 0\u20116) from a customer survey.",
+    "tags": [
+      "NPS",
+      "customer-satisfaction",
+      "metrics"
+    ]
+  },
+  {
+    "id": "pm-metrics-003",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "easy",
+    "question": "What is cohort analysis and why is it useful for product managers?",
+    "reference_answer": "Cohort analysis groups users by a shared characteristic or start date to track their behavior over time, helping identify retention patterns and the impact of changes.",
+    "tags": [
+      "cohort",
+      "retention",
+      "metrics"
+    ]
+  },
+  {
+    "id": "pm-metrics-004",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "easy",
+    "question": "Explain the difference between conversion rate and click\u2011through rate (CTR).",
+    "reference_answer": "Conversion rate measures the percentage of users who complete a desired action after clicking, while CTR measures the percentage of ad impressions that result in clicks.",
+    "tags": [
+      "conversion",
+      "CTR",
+      "metrics"
+    ]
+  },
+  {
+    "id": "pm-metrics-005",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "medium",
+    "question": "How do you prioritize which product metrics to track when launching a new feature?",
+    "reference_answer": "I first align metrics with business objectives, then choose leading indicators that can be measured early and are predictive of the desired outcome, while also considering data availability and impact on decision\u2011making.",
+    "tags": [
+      "prioritization",
+      "KPIs",
+      "feature launch"
+    ]
+  },
+  {
+    "id": "pm-metrics-006",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "medium",
+    "question": "Explain the difference between leading and lagging metrics and give an example of each in a SaaS product context.",
+    "reference_answer": "Leading metrics forecast future performance, such as daily active users or trial sign\u2011ups, whereas lagging metrics confirm results after the fact, like monthly recurring revenue or churn rate.",
+    "tags": [
+      "leading vs lagging",
+      "SaaS",
+      "performance"
+    ]
+  },
+  {
+    "id": "pm-metrics-007",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "medium",
+    "question": "A/B test shows a 5% increase in click\u2011through rate but no change in conversion; how would you interpret this result?",
+    "reference_answer": "The higher click\u2011through indicates improved engagement with the test variation, but unchanged conversion suggests the downstream funnel remains a bottleneck, so I would investigate post\u2011click experience before scaling the change.",
+    "tags": [
+      "A/B testing",
+      "interpretation",
+      "funnel"
+    ]
+  },
+  {
+    "id": "pm-metrics-008",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "medium",
+    "question": "What steps would you take to ensure the reliability of metric data used for product decisions?",
+    "reference_answer": "I would define clear metric definitions, implement consistent data collection pipelines, set up automated validation checks, and regularly audit the data against source systems to catch discrepancies early.",
+    "tags": [
+      "data quality",
+      "metrics reliability",
+      "process"
+    ]
+  },
+  {
+    "id": "pm-metrics-009",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "hard",
+    "question": "Explain how you would design a North Star metric for a multi\u2011sided platform, including trade\u2011offs between leading and lagging indicators.",
+    "reference_answer": "Identify the core value\u2011creating loop, select a metric that directly captures that value (e.g., successful matches per active user), ensure it is leading, can be measured consistently, and complement it with lagging metrics such as churn or revenue to monitor long\u2011term health.",
+    "tags": [
+      "north star",
+      "leading vs lagging",
+      "multi-sided"
+    ]
+  },
+  {
+    "id": "pm-metrics-010",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "hard",
+    "question": "A product\u2019s adoption curve shows a slowdown after the initial launch. Which cohort\u2011based metrics would you analyze to diagnose the issue, and how would you act on the findings?",
+    "reference_answer": "Break down users by acquisition cohort and examine activation, retention, and revenue per cohort over time; a drop in activation or early\u2011week retention signals friction in onboarding, prompting experiments on tutorials or pricing, while stable later\u2011week retention suggests the problem is early engagement.",
+    "tags": [
+      "cohort analysis",
+      "retention",
+      "activation"
+    ]
+  },
+  {
+    "id": "pm-metrics-011",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "hard",
+    "question": "How would you construct a balanced scorecard for a SaaS product that aligns product, engineering, and sales goals, and what pitfalls must you avoid?",
+    "reference_answer": "Combine leading product metrics (e.g., feature adoption rate), engineering health metrics (e.g., deployment frequency, MTTR) and lagging sales metrics (e.g., ARR growth, churn), ensuring each metric is owned, measurable, and not overly correlated to prevent gaming or misaligned incentives.",
+    "tags": [
+      "balanced scorecard",
+      "SaaS",
+      "metric alignment"
+    ]
+  },
+  {
+    "id": "pm-metrics-012",
+    "role": "product manager",
+    "topic": "metrics",
+    "difficulty": "hard",
+    "question": "When A/B testing a pricing change, what statistical considerations ensure the result is reliable, and how would you report the impact on key business metrics?",
+    "reference_answer": "Use a sufficient sample size to achieve desired power (typically 80%), pre\u2011define a significance level (e.g., 95% confidence), apply sequential testing correction if needed, and report the lift in primary metrics such as conversion rate, ARPU, and downstream effects on churn and LTV with confidence intervals.",
+    "tags": [
+      "A/B testing",
+      "statistical power",
+      "pricing"
+    ]
+  },
+  {
+    "id": "pm-prioritization-001",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "easy",
+    "question": "How do you decide which features to prioritize when resources are limited?",
+    "reference_answer": "I assess impact on user goals, business objectives, and effort required, then rank features using a framework like RICE or MoSCoW to focus on high\u2011value, low\u2011effort items.",
+    "tags": [
+      "RICE",
+      "MoSCoW",
+      "resource\u2011constraints"
+    ]
+  },
+  {
+    "id": "pm-prioritization-002",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "easy",
+    "question": "Can you describe a time you had to reprioritize a roadmap due to new information?",
+    "reference_answer": "I gathered the new data, re\u2011evaluated feature impact, communicated changes to stakeholders, and adjusted the roadmap to align with the updated priorities.",
+    "tags": [
+      "roadmap",
+      "stakeholder\u2011communication",
+      "pivot"
+    ]
+  },
+  {
+    "id": "pm-prioritization-003",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "easy",
+    "question": "What criteria do you use to balance short\u2011term wins against long\u2011term strategic goals?",
+    "reference_answer": "I weigh immediate user value and revenue impact against alignment with the product vision, ensuring short\u2011term work contributes to long\u2011term objectives.",
+    "tags": [
+      "short\u2011term",
+      "long\u2011term",
+      "product\u2011vision"
+    ]
+  },
+  {
+    "id": "pm-prioritization-004",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "easy",
+    "question": "How do you involve cross\u2011functional teams in the prioritization process?",
+    "reference_answer": "I facilitate workshops where engineers, designers, and marketers share insights, then incorporate their feedback into a shared scoring model to reach consensus.",
+    "tags": [
+      "cross\u2011functional",
+      "workshop",
+      "consensus"
+    ]
+  },
+  {
+    "id": "pm-prioritization-005",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "medium",
+    "question": "Can you describe how you would apply the RICE scoring model to prioritize features and what each component represents?",
+    "reference_answer": "RICE stands for Reach, Impact, Confidence, and Effort; you estimate each factor for a feature, calculate the RICE score (Reach\u202f\u00d7\u202fImpact\u202f\u00d7\u202fConfidence\u202f\u00f7\u202fEffort), and rank features by descending score to guide prioritization.",
+    "tags": [
+      "framework",
+      "scoring",
+      "metrics"
+    ]
+  },
+  {
+    "id": "pm-prioritization-006",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "medium",
+    "question": "How do you balance short\u2011term revenue goals with long\u2011term product vision when prioritizing the roadmap?",
+    "reference_answer": "You allocate capacity across horizons\u2014e.g., dedicating a portion of resources to quick wins that drive immediate revenue while preserving time for strategic initiatives that align with the long\u2011term vision, ensuring both goals receive attention.",
+    "tags": [
+      "tradeoff",
+      "strategy",
+      "roadmap"
+    ]
+  },
+  {
+    "id": "pm-prioritization-007",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "medium",
+    "question": "What process would you use to resolve conflicting priorities from multiple stakeholders?",
+    "reference_answer": "Facilitate a transparent prioritization workshop where each stakeholder presents objectives, map those to business outcomes, and use a shared scoring framework to objectively rank items, then communicate the rationale to maintain alignment.",
+    "tags": [
+      "stakeholder",
+      "alignment",
+      "process"
+    ]
+  },
+  {
+    "id": "pm-prioritization-008",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "medium",
+    "question": "How can data be used to validate or adjust a prioritization decision after a feature is shipped?",
+    "reference_answer": "Post\u2011launch, you monitor key performance indicators such as adoption rate, usage frequency, and revenue impact; if metrics fall short of targets, you reassess the feature's priority and decide whether to iterate, sunset, or re\u2011prioritize resources.",
+    "tags": [
+      "data",
+      "metrics",
+      "feedback"
+    ]
+  },
+  {
+    "id": "pm-prioritization-009",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "hard",
+    "question": "How would you apply the RICE scoring model to prioritize a product backlog when the impact metric is ambiguous, and what steps would you take to ensure consistent scoring?",
+    "reference_answer": "Estimate Reach, assign a relative Impact score (e.g., low/medium/high) using proxy metrics, set Confidence levels, calculate Effort in person\u2011weeks, then compute the RICE score (Reach\u00d7Impact\u00d7Confidence\u00f7Effort) to rank items, revisiting assumptions as new data arrives.",
+    "tags": [
+      "RICE",
+      "scoring",
+      "consistency"
+    ]
+  },
+  {
+    "id": "pm-prioritization-010",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "hard",
+    "question": "When faced with a choice between addressing technical debt and launching a high\u2011impact feature, what framework would you use to decide which to prioritize and why?",
+    "reference_answer": "Compare the expected ROI of the feature against the risk reduction and future velocity gains from reducing debt, weigh stakeholder urgency, and use a cost\u2011benefit analysis that includes long\u2011term maintenance costs to determine the higher net value.",
+    "tags": [
+      "technical debt",
+      "feature prioritization",
+      "ROI"
+    ]
+  },
+  {
+    "id": "pm-prioritization-011",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "hard",
+    "question": "Describe how you would construct and use a weighted scoring matrix when stakeholder priorities conflict, and how you would resolve disagreements over weight assignments.",
+    "reference_answer": "Gather each stakeholder's criteria, assign initial weights, normalize them to sum to 100%, run a sensitivity analysis to see how score rankings shift, and facilitate a negotiation workshop to adjust weights until a consensus or acceptable compromise is reached.",
+    "tags": [
+      "weighted matrix",
+      "stakeholder alignment",
+      "sensitivity"
+    ]
+  },
+  {
+    "id": "pm-prioritization-012",
+    "role": "product manager",
+    "topic": "prioritization",
+    "difficulty": "hard",
+    "question": "Given two overlapping experiments targeting the same user segment but with limited resources, how would you design a test to determine which experiment should receive full funding?",
+    "reference_answer": "Run a split\u2011test where each experiment is shown to a statistically significant, non\u2011overlapping user subset, include a control group, measure incremental lift on key metrics, and apply hypothesis testing to identify the experiment with the higher, statistically significant impact.",
+    "tags": [
+      "experimentation",
+      "resource allocation",
+      "A/B testing"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-001",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "easy",
+    "question": "What is stakeholder management and why is it important for a product manager?",
+    "reference_answer": "Stakeholder management is the process of identifying, analyzing, and engaging individuals or groups who have an interest in the product; it is important because it ensures alignment, gathers valuable feedback, and mitigates risks that could affect product success.",
+    "tags": [
+      "definition",
+      "importance"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-002",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "easy",
+    "question": "How do you prioritize stakeholders when their interests conflict?",
+    "reference_answer": "You prioritize by evaluating each stakeholder's impact on product goals, level of influence, and urgency, often using tools like a stakeholder map or RACI matrix to decide whose needs take precedence.",
+    "tags": [
+      "prioritization",
+      "conflict"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-003",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "easy",
+    "question": "Can you describe a technique you use to keep stakeholders informed about product progress?",
+    "reference_answer": "I use regular status updates such as concise email newsletters, live dashboards, and sprint demo meetings to keep stakeholders aligned and reduce misunderstandings.",
+    "tags": [
+      "communication",
+      "updates"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-004",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "easy",
+    "question": "What steps would you take if a key stakeholder is resistant to a proposed feature?",
+    "reference_answer": "First, I seek to understand their concerns, then present data or user research to address them, involve them in brainstorming alternatives, and negotiate trade\u2011offs that align with the overall product strategy.",
+    "tags": [
+      "resistance",
+      "negotiation"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-005",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "medium",
+    "question": "How do you identify and prioritize stakeholders when planning a new product feature?",
+    "reference_answer": "I start with a stakeholder map that plots each group's influence and interest, then use a RACI matrix to assign responsibility and prioritize those with high impact on the product goals.",
+    "tags": [
+      "identification",
+      "prioritization",
+      "mapping"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-006",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "medium",
+    "question": "Can you describe a situation where two key stakeholders had conflicting requirements and how you resolved it?",
+    "reference_answer": "I facilitated a joint workshop to surface the underlying business objectives, aligned the requirements with the product vision, and used data-driven impact analysis to negotiate a compromise that satisfied both parties.",
+    "tags": [
+      "conflict_resolution",
+      "communication",
+      "negotiation"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-007",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "medium",
+    "question": "What techniques do you employ to keep stakeholders informed and engaged throughout the product lifecycle?",
+    "reference_answer": "I set up regular cadence meetings, share concise dashboards and product demos, and distribute brief newsletters that highlight milestones, risks, and upcoming decisions to maintain transparency and engagement.",
+    "tags": [
+      "communication",
+      "engagement",
+      "transparency"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-008",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "medium",
+    "question": "How do you measure the effectiveness of your stakeholder management approach?",
+    "reference_answer": "I track stakeholder satisfaction surveys, Net Promoter Scores for internal partners, meeting attendance rates, and alignment metrics such as the percentage of decisions made with documented stakeholder buy\u2011in.",
+    "tags": [
+      "metrics",
+      "feedback",
+      "continuous_improvement"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-009",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "hard",
+    "question": "How do you prioritize conflicting stakeholder requirements that affect the product roadmap, and which decision\u2011making framework do you apply to ensure alignment?",
+    "reference_answer": "I map each requirement against business impact, effort, and strategic fit using a weighted scoring model such as RICE or MoSCoW, then present the ranked list to stakeholders to gain consensus.",
+    "tags": [
+      "prioritization",
+      "framework"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-010",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "hard",
+    "question": "Describe a specific instance where a key stakeholder opposed a product decision; how did you communicate, negotiate, and achieve alignment?",
+    "reference_answer": "I gathered data to validate the decision, held a focused one\u2011on\u2011one to understand their concerns, and co\u2011created mitigation steps, ultimately securing buy\u2011in through transparent trade\u2011off discussion.",
+    "tags": [
+      "communication",
+      "conflict"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-011",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "hard",
+    "question": "What steps would you take to perform a stakeholder analysis for a new product launch in a highly regulated industry, and how would you mitigate high\u2011influence risks?",
+    "reference_answer": "I identify internal and external stakeholders, plot them on an influence\u2011interest matrix, assess regulatory constraints, and design targeted engagement plans with compliance checkpoints to reduce risk.",
+    "tags": [
+      "analysis",
+      "regulation"
+    ]
+  },
+  {
+    "id": "pm-stakeholdermanagement-012",
+    "role": "product manager",
+    "topic": "stakeholder management",
+    "difficulty": "hard",
+    "question": "Which metrics do you track to gauge stakeholder satisfaction over time, and how do you respond when those metrics show a decline?",
+    "reference_answer": "I monitor NPS, CSAT, and engagement frequency, then conduct root\u2011cause interviews and adjust communication cadence or feature priorities to address the identified issues.",
+    "tags": [
+      "metrics",
+      "feedback"
+    ]
+  },
+  {
+    "id": "pm-userresearch-001",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "easy",
+    "question": "What is the purpose of conducting user research in product development?",
+    "reference_answer": "User research uncovers real user needs, pain points, and behaviors, enabling data\u2011driven product decisions and better market fit.",
+    "tags": [
+      "purpose",
+      "user research",
+      "product development"
+    ]
+  },
+  {
+    "id": "pm-userresearch-002",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "easy",
+    "question": "Name two common methods for gathering qualitative user insights.",
+    "reference_answer": "Typical qualitative methods include user interviews and contextual observations such as field studies or usability testing.",
+    "tags": [
+      "qualitative",
+      "methods",
+      "insights"
+    ]
+  },
+  {
+    "id": "pm-userresearch-003",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "easy",
+    "question": "How would you prioritize research findings when they conflict with business goals?",
+    "reference_answer": "I would assess the impact on user experience, align findings with strategic objectives, and use data to balance trade\u2011offs between user value and business priorities.",
+    "tags": [
+      "prioritization",
+      "conflict",
+      "business goals"
+    ]
+  },
+  {
+    "id": "pm-userresearch-004",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "easy",
+    "question": "What is a user persona and why is it useful?",
+    "reference_answer": "A user persona is a fictional profile based on research that represents a target user segment, helping teams empathize and design solutions that meet real needs.",
+    "tags": [
+      "persona",
+      "empathy",
+      "design"
+    ]
+  },
+  {
+    "id": "pm-userresearch-005",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "medium",
+    "question": "How do you prioritize user research findings when making product decisions?",
+    "reference_answer": "I rank findings by impact on user goals, business objectives, and implementation feasibility, often using a weighted scoring matrix to balance short\u2011term wins with long\u2011term value.",
+    "tags": [
+      "prioritization",
+      "decision-making"
+    ]
+  },
+  {
+    "id": "pm-userresearch-006",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "medium",
+    "question": "Can you describe a situation where you combined qualitative and quantitative research methods, and how the results informed your roadmap?",
+    "reference_answer": "I conducted interviews to uncover user motivations and ran surveys to validate patterns at scale, then synthesized the insights to identify high\u2011impact features that addressed both expressed needs and measurable usage gaps.",
+    "tags": [
+      "qualitative",
+      "quantitative",
+      "analysis"
+    ]
+  },
+  {
+    "id": "pm-userresearch-007",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "medium",
+    "question": "What steps would you take to design and run a usability test for a new feature before launch?",
+    "reference_answer": "I define clear tasks and success metrics, recruit representative users, create a test script, observe behavior while thinking aloud, and analyze findings to iterate on the design prior to release.",
+    "tags": [
+      "usability",
+      "testing",
+      "design"
+    ]
+  },
+  {
+    "id": "pm-userresearch-008",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "medium",
+    "question": "How do you ensure that research insights are effectively communicated and acted upon by cross\u2011functional teams?",
+    "reference_answer": "I tailor summaries to each audience, use visual storyboards or dashboards to highlight key takeaways, and facilitate workshops that translate insights into concrete action items and measurable goals.",
+    "tags": [
+      "communication",
+      "stakeholders",
+      "insights"
+    ]
+  },
+  {
+    "id": "pm-userresearch-009",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "hard",
+    "question": "How do you design a mixed\u2011methods research study to uncover latent user needs for a new product feature, and what criteria do you use to determine the appropriate sample size for each method?",
+    "reference_answer": "Combine qualitative methods (e.g., contextual interviews, diary studies) to reach thematic saturation with quantitative methods (e.g., surveys, analytics) sized for statistical power; calculate the quantitative sample using desired confidence level, effect size, and variance, and set the qualitative sample until no new insights emerge.",
+    "tags": [
+      "mixed-methods",
+      "sample-size",
+      "research-design"
+    ]
+  },
+  {
+    "id": "pm-userresearch-010",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "hard",
+    "question": "Explain how you would construct and validate a personas framework using both primary and secondary data, ensuring it remains actionable throughout the product lifecycle.",
+    "reference_answer": "Gather primary data through user interviews and ethnographic observations, enrich it with secondary sources such as market reports and usage analytics, cluster findings into archetypes, then validate personas via stakeholder reviews and iterative testing against real\u2011world behavior, updating them as new data arrives.",
+    "tags": [
+      "personas",
+      "validation",
+      "data-synthesis"
+    ]
+  },
+  {
+    "id": "pm-userresearch-011",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "hard",
+    "question": "Describe the process for conducting a causal impact analysis to measure how a redesign influences key user behavior metrics, including the statistical techniques you would employ.",
+    "reference_answer": "Run controlled experiments (A/B tests) or use quasi\u2011experimental designs like difference\u2011in\u2011differences or regression discontinuity, control for confounding variables with multivariate regression, and assess lift and statistical significance to attribute changes directly to the redesign.",
+    "tags": [
+      "causal-analysis",
+      "AB-testing",
+      "metrics"
+    ]
+  },
+  {
+    "id": "pm-userresearch-012",
+    "role": "product manager",
+    "topic": "user research",
+    "difficulty": "hard",
+    "question": "How would you prioritize conflicting user research findings that suggest divergent product directions, and what frameworks help reconcile them with business objectives?",
+    "reference_answer": "Map findings onto impact\u2011effort or RICE matrices, apply the Kano model to gauge customer delight versus basic expectations, and align the prioritized outcomes with OKRs and stakeholder consensus to resolve tension between user insights and business goals.",
+    "tags": [
+      "prioritization",
+      "conflict-resolution",
+      "frameworks"
+    ]
+  }
+]

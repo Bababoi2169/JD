@@ -1,1 +1,35 @@
-{"roles": [], "topics": [], "difficulties": ["easy", "medium", "hard"]}
+{
+  "roles": [
+    "backend developer",
+    "frontend developer",
+    "data analyst",
+    "data scientist",
+    "product manager"
+  ],
+  "topics": [
+    "APIs",
+    "CSS",
+    "Excel",
+    "JavaScript",
+    "Python",
+    "React",
+    "SQL",
+    "algorithms",
+    "data visualization",
+    "machine learning",
+    "metrics",
+    "model evaluation",
+    "prioritization",
+    "product strategy",
+    "stakeholder management",
+    "statistics",
+    "system design",
+    "user research",
+    "web performance"
+  ],
+  "difficulties": [
+    "easy",
+    "medium",
+    "hard"
+  ]
+}
