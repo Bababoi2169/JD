@@ -1,0 +1,9 @@
+<h2>Score: {{ score }}/{{ total }}</h2>
+{% if weak %}<p>Weak topics: {{ weak|join(", ") }}</p>{% endif %}
+{% for r in results %}
+  <h3>{{ loop.index }}. {{ r.question }}</h3>
+  <p>Your answer: {{ r.options[r.picked] }} {{ "✓" if r.correct else "✗" }}</p>
+  {% if not r.correct %}<p>Correct: {{ r.options[r.correct_index] }}</p>{% endif %}
+  <p>{{ r.explanation }}</p>
+{% endfor %}
+<a href="{{ url_for('index') }}">New quiz</a>
