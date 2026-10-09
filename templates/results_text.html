@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head><body><div class="container">
+<div class="card">
+  <div class="score">{{ score }}%</div>
+  {% for lvl, s in by_level.items() %}<span class="tag">{{ lvl|capitalize }}: {{ s }}%</span>{% endfor %}
+  {% if weak %}<p class="meta">Topics to review:</p>
+    {% for t in weak %}<span class="tag">{{ t }}</span>{% endfor %}{% endif %}
+</div>
+{% for r in results %}
+<div class="card">
+  <h3>{{ loop.index }}. {{ r.question }}</h3>
+  <p><b>Your answer:</b> {{ r.answer or "(blank)" }}</p>
+  <p class="{{ {'correct':'ok','partial':'part','incorrect':'no'}[r.verdict] }}">{{ r.verdict|capitalize }} · {{ r.score }}%</p>
+  <p>{{ r.feedback }}</p>
+  {% if r.got %}<p class="ok">Covered</p><ul>{% for g in r.got %}<li>{{ g }}</li>{% endfor %}</ul>{% endif %}
+  {% if r.missed %}<p class="no">Missed</p><ul>{% for m in r.missed %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+  <details><summary>Model answer</summary><p>{{ r.model_answer }}</p></details>
+  <span class="meta">Targets: {{ r.tied_to }}{% if r.source_id %} · Bank: {{ r.source_id }}{% endif %}</span>
+</div>
+{% endfor %}
+<a class="btn" href="{{ url_for('index') }}">New quiz</a>
+</div></body></html>

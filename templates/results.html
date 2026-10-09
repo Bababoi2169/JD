@@ -1,10 +1,28 @@
-<h2>Score: {{ score }}/{{ total }}</h2>
-{% if weak %}<p>Weak topics: {{ weak|join(", ") }}</p>{% endif %}
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head><body><div class="container">
+<div class="card">
+  <div class="score">{{ score }}/{{ total }}</div>
+  {% for lvl, s in by_level.items() %}<span class="tag">{{ lvl|capitalize }}: {{ s[0] }}/{{ s[1] }}</span>{% endfor %}
+  {% if weak %}
+    <p class="meta">Topics to review:</p>
+    {% for t in weak %}<span class="tag">{{ t }}</span>{% endfor %}
+  {% endif %}
+</div>
+
 {% for r in results %}
+<div class="card">
   <h3>{{ loop.index }}. {{ r.question }}</h3>
-  <p>Your answer: {{ r.options[r.picked] }} {{ "✓" if r.correct else "✗" }}</p>
-  {% if not r.correct %}<p>Correct: {{ r.options[r.correct_index] }}</p>{% endif %}
+  <p>Your answer: {{ r.options[r.picked] }}
+     <span class="{{ 'ok' if r.correct else 'no' }}">{{ "✓" if r.correct else "✗" }}</span></p>
+  {% if not r.correct %}<p>Correct: <b>{{ r.options[r.correct_index] }}</b></p>{% endif %}
   <p>{{ r.explanation }}</p>
-  <small>Targets: {{ r.tied_to }}{% if r.source_id %} | Bank: {{ r.source_id }}{% endif %}</small>
+  <span class="meta">Targets: {{ r.tied_to }}{% if r.source_id %} · Bank: {{ r.source_id }}{% endif %}</span>
+</div>
 {% endfor %}
-<a href="{{ url_for('index') }}">New quiz</a>
+
+<a class="btn" href="{{ url_for('index') }}">New quiz</a>
+</div></body></html>

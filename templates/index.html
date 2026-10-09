@@ -1,5 +1,25 @@
-<form method="POST" enctype="multipart/form-data">
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head><body><div class="container">
+<h1>Interview Quiz Generator</h1>
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+<form method="POST" enctype="multipart/form-data" class="card" id="gen-form">
+  <label class="field">Resume (PDF or DOCX)</label>
   <input type="file" name="resume" accept=".pdf,.docx" required>
-  <textarea name="jd" placeholder="Paste job description" required></textarea>
-  <button type="submit">Generate quiz</button>
+  <label class="field">Job description</label>
+  <textarea name="jd" placeholder="Paste the job description" required>{{ jd or "" }}</textarea>
+  <label class="field">Answer style</label>
+  <label class="option"><input type="radio" name="mode" value="text" checked> Type your answers (AI-graded)</label>
+  <label class="option"><input type="radio" name="mode" value="mcq"> Multiple choice</label>
+  <button type="submit" id="gen-btn">Generate quiz</button>
 </form>
+<script>
+  document.getElementById("gen-form").addEventListener("submit", () => {
+    const b = document.getElementById("gen-btn");
+    b.disabled = true; b.textContent = "Generating... (10-20s)";
+  });
+</script>
+</div></body></html>

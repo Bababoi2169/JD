@@ -1,10 +1,30 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head><body><div class="container">
+<h1>Your Quiz</h1>
 <form method="POST" action="{{ url_for('submit', quiz_id=quiz_id) }}">
+  {% set ns = namespace(level=None) %}
   {% for q in questions %}
     {% set qi = loop.index0 %}
-    <h3>{{ loop.index }}. {{ q.question }}</h3>
-    {% for o in q.options %}
-      <label><input type="radio" name="q{{ qi }}" value="{{ loop.index0 }}" required> {{ o }}</label><br>
-    {% endfor %}
+    {% if q.difficulty != ns.level %}
+      <h2>{{ q.difficulty|capitalize }}</h2>
+      {% set ns.level = q.difficulty %}
+    {% endif %}
+    <div class="card">
+      <h3>{{ loop.index }}. {{ q.question }}</h3>
+      {% if mode == "mcq" %}
+        {% for o in q.options %}
+          <label class="option"><input type="radio" name="q{{ qi }}" value="{{ loop.index0 }}" required>{{ o }}</label>
+        {% endfor %}
+      {% else %}
+        <textarea class="answer" name="q{{ qi }}" placeholder="Type your answer..."></textarea>
+      {% endif %}
+      <span class="meta">{{ q.topic }} · {{ q.difficulty }}</span>
+    </div>
   {% endfor %}
   <button type="submit">Submit</button>
 </form>
+</div></body></html>
