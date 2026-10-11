@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interview Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head><body><div class="container">
+
+<h1>Your progress</h1>
+{% if attempts %}
+  {% set avg = (attempts|sum(attribute='score') / attempts|length)|round|int %}
+  <div class="card"><span class="meta">{{ attempts|length }} attempts · average {{ avg }}% · best {{ attempts|map(attribute='score')|max }}%</span></div>
+  {% for a in attempts %}
+  <div class="card">
+    <b>{{ a.role or "General" }}</b>
+    <span class="meta">{{ a.submitted_at.replace("T", " ") }} · {{ "MCQ" if a.mode == "mcq" else "Typed" }}</span>
+    <div class="bar"><div style="width:{{ a.score }}%"></div></div>
+    <b>{{ a.score }}%</b> ·
+    <a href="{{ url_for('results', quiz_id=a.id) }}">View</a> ·
+    <a href="{{ url_for('export_pdf', quiz_id=a.id) }}">PDF</a>
+  </div>
+  {% endfor %}
+{% else %}<p>No attempts yet.</p>{% endif %}
+<a class="btn" href="{{ url_for('index') }}">New quiz</a>
+
+</div></body></html>

@@ -1,21 +1,20 @@
 import uuid
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 from utils import extract_text, generate_quiz, extract_requirements, evaluate_answers
 from retrieval import get_relevant_questions
-from concurrent.futures import ThreadPoolExecutor
+from db import init_db, save_quiz, get_quiz, save_attempt, get_attempt, list_history
+from pdf_export import make_pdf
+from groq import RateLimitError
 
 app = Flask(__name__)
+init_db()
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB
 
-QUIZZES = {}  # quiz_id -> list of questions (in memory, resets on restart)
-
-def build_quiz(resume_text, jd_text, req, mode, per_level=5):
-    def one(level):
-        bank = get_relevant_questions(req["queries"], req.get("role"), difficulty=level, max_total=8)
-        return generate_quiz(resume_text, jd_text, bank, n=per_level, difficulty=level, mode=mode)
-    with ThreadPoolExecutor(max_workers=3) as ex:   # runs the 3 calls in parallel
-        parts = list(ex.map(one, ["easy", "medium", "hard"]))
-    return [q for part in parts for q in part]
+def build_quiz(resume_text, jd_text, req, mode):
+    bank = []
+    for level in ["easy", "medium", "hard"]:
+        bank += get_relevant_questions(req["queries"], req.get("role"), difficulty=level, max_total=4)
+    return generate_quiz(resume_text, jd_text, bank, n=15, mode=mode)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -33,10 +32,13 @@ def index():
             mode = request.form.get("mode", "text")
             questions = build_quiz(resume_text, jd_text, req, mode)
             quiz_id = str(uuid.uuid4())
-            QUIZZES[quiz_id] = {"mode": mode, "questions": questions}
+            save_quiz(quiz_id, mode, req.get("role"), questions, req["gap"])
             return redirect(url_for("quiz", quiz_id=quiz_id))
+
         except (ValueError, RuntimeError) as e:
             return render_template("index.html", error=str(e))
+        except RateLimitError:
+            return render_template("index.html", error="The AI service is busy. Wait a minute and try again.", jd=request.form.get("jd", ""))
         except Exception:
             app.logger.exception("Quiz generation failed")
             return render_template("index.html", error="Something went wrong. Please try again.")
@@ -45,49 +47,78 @@ def index():
 
 @app.route("/quiz/<quiz_id>")
 def quiz(quiz_id):
-    quiz = QUIZZES.get(quiz_id)
-    if not quiz:
+    q = get_quiz(quiz_id)
+    if not q:
         return redirect(url_for("index"))
-    return render_template("quiz.html", questions=quiz["questions"], mode=quiz["mode"], quiz_id=quiz_id)
+    if get_attempt(quiz_id):
+        return redirect(url_for("results", quiz_id=quiz_id))
+    return render_template("quiz.html", questions=q["questions"], mode=q["mode"], quiz_id=quiz_id)
 
 
 @app.route("/quiz/<quiz_id>/submit", methods=["POST"])
 def submit(quiz_id):
-    quiz = QUIZZES.get(quiz_id)
+    quiz = get_quiz(quiz_id)
     if not quiz:
         return redirect(url_for("index"))
     questions, mode = quiz["questions"], quiz["mode"]
 
     if mode == "mcq":
-        results, score, by_level = [], 0, {}
+        results = []
         for i, q in enumerate(questions):
             picked = int(request.form.get(f"q{i}", -1))
-            correct = picked == q["correct_index"]
-            score += correct
-            results.append({**q, "picked": picked, "correct": correct})
-            s = by_level.setdefault(q["difficulty"], [0, 0])
-            s[0] += correct
-            s[1] += 1
+            results.append({**q, "picked": picked, "correct": picked == q["correct_index"]})
+        score = round(100 * sum(r["correct"] for r in results) / len(results))
         weak = sorted({r["topic"] for r in results if not r["correct"]})
-        return render_template("results.html", results=results, score=score,
-                               total=len(results), weak=weak, by_level=by_level)
+    else:
+        items = [{**q, "answer": request.form.get(f"q{i}", "").strip()} for i, q in enumerate(questions)]
+        try:
+            graded = evaluate_answers(items)
+        except Exception:
+            app.logger.exception("Grading failed")
+            return "Grading failed. Go back and submit again.", 500
+        results = [{**it, **g} for it, g in zip(items, graded)]
+        score = round(sum(r["score"] for r in results) / len(results))
+        weak = sorted({r["topic"] for r in results if r["verdict"] != "correct"})
 
-    items = [{**q, "answer": request.form.get(f"q{i}", "").strip()} for i, q in enumerate(questions)]
-    try:
-        graded = evaluate_answers(items)
-    except Exception:
-        app.logger.exception("Grading failed")
-        return "Grading failed. Go back and submit again.", 500
+    save_attempt(quiz_id, score, weak, results)
+    return redirect(url_for("results", quiz_id=quiz_id))
 
-    results = [{**it, **g} for it, g in zip(items, graded)]
-    score = round(sum(r["score"] for r in results) / len(results))
+
+def summarize(mode, results):
     levels = {}
     for r in results:
-        levels.setdefault(r["difficulty"], []).append(r["score"])
-    by_level = {k: round(sum(v) / len(v)) for k, v in levels.items()}
-    weak = sorted({r["topic"] for r in results if r["verdict"] != "correct"})
-    return render_template("results_text.html", results=results, score=score,
-                           by_level=by_level, weak=weak)
+        levels.setdefault(r["difficulty"], []).append(r)
+    if mode == "mcq":
+        return {k: [sum(x["correct"] for x in v), len(v)] for k, v in levels.items()}
+    return {k: round(sum(x["score"] for x in v) / len(v)) for k, v in levels.items()}
+
+
+@app.route("/quiz/<quiz_id>/results")
+def results(quiz_id):
+    quiz, att = get_quiz(quiz_id), get_attempt(quiz_id)
+    if not quiz or not att:
+        return redirect(url_for("index"))
+    res, mode = att["results"], quiz["mode"]
+    common = dict(results=res, weak=att["weak"], by_level=summarize(mode, res),
+                  gap=quiz["gap"], quiz_id=quiz_id)
+    if mode == "mcq":
+        return render_template("results.html", score=sum(r["correct"] for r in res), total=len(res), **common)
+    return render_template("results_text.html", score=att["score"], **common)
+
+
+@app.route("/history")
+def history():
+    return render_template("history.html", attempts=list_history())
+
+
+@app.route("/quiz/<quiz_id>/pdf")
+def export_pdf(quiz_id):
+    quiz = get_quiz(quiz_id)
+    if not quiz:
+        return redirect(url_for("index"))
+    buf = make_pdf(quiz, get_attempt(quiz_id))
+    return send_file(buf, mimetype="application/pdf", as_attachment=True,
+                     download_name=f"interview-quiz-{quiz_id[:8]}.pdf")
 
 
 if __name__ == "__main__":

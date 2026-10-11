@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head><body><div class="container">
 <h1>Your Quiz</h1>
-<form method="POST" action="{{ url_for('submit', quiz_id=quiz_id) }}">
+<form method="POST" action="{{ url_for('submit', quiz_id=quiz_id) }}" id="quiz-form">
   {% set ns = namespace(level=None) %}
   {% for q in questions %}
     {% set qi = loop.index0 %}

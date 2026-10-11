@@ -22,3 +22,5 @@ button:disabled { opacity:.6; cursor:wait; }
 .no { color:var(--bad); font-weight:600; }
 textarea.answer { min-height:100px; margin-bottom:8px; }
 .part { color:#d97706; font-weight:600; }
+.bar { background:#e5e7eb; border-radius:999px; height:10px; margin:8px 0; overflow:hidden; }
+.bar > div { background:var(--accent); height:100%; }

@@ -1,0 +1,11 @@
+{% if gap and (gap.matched or gap.partial or gap.missing) %}
+<div class="card">
+  <h3>Skill gap report</h3>
+  {% for label, key, cls in [("Strong","matched","ok"),("Partial","partial","part"),("Missing","missing","no")] %}
+    {% if gap[key] %}<p class="{{ cls }}">{{ label }}</p>
+      {% for s in gap[key] %}<span class="tag">{{ s }}</span>{% endfor %}{% endif %}
+  {% endfor %}
+  {% if gap.tips %}<h4>How to close the gaps</h4>
+    <ul>{% for t in gap.tips %}<li><b>{{ t.skill }}:</b> {{ t.tip }}</li>{% endfor %}</ul>{% endif %}
+</div>
+{% endif %}

@@ -16,6 +16,7 @@
   <label class="option"><input type="radio" name="mode" value="mcq"> Multiple choice</label>
   <button type="submit" id="gen-btn">Generate quiz</button>
 </form>
+<a href="{{ url_for('history') }}">Past quizzes</a>
 <script>
   document.getElementById("gen-form").addEventListener("submit", () => {
     const b = document.getElementById("gen-btn");

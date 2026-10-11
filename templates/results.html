@@ -24,5 +24,9 @@
 </div>
 {% endfor %}
 
+{% include "_gap.html" %}
+
+<a class="btn" href="{{ url_for('export_pdf', quiz_id=quiz_id) }}">Download PDF</a>
+<a class="btn" href="{{ url_for('history') }}">History</a>
 <a class="btn" href="{{ url_for('index') }}">New quiz</a>
 </div></body></html>
