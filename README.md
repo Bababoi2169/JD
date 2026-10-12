@@ -42,21 +42,17 @@ Open `.env` and set your key:
 GROQ_API_KEY=your_key_here
 ```
 
-### Build the question bank
+### Load the question bank
 
-The vector database (`chroma_db/`) is not committed, so build it once from the JSON files in `data/`:
+The question bank (`data/question_bank.json`) and its vocabulary (`data/vocab.json`) are included in the repo. The vector database (`chroma_db/`) is generated locally, so load the bank into it once:
 
 ```bash
 python ingest.py --file data/question_bank.json
 ```
 
-If `data/question_bank.json` does not exist yet, generate a starter bank first (this makes many Groq calls and takes a few minutes), then review it before ingesting:
+The first run downloads a small embedding model (about 80 MB). Re-running `ingest.py` is safe: entries are upserted, not duplicated.
 
-```bash
-python generate_bank.py
-```
-
-Re-running `ingest.py` is safe: entries are upserted, not duplicated.
+Optional: `python generate_bank.py` regenerates a starter bank with Groq (many API calls, a few minutes). It overwrites `data/question_bank.json` and `data/vocab.json`, so review the output before ingesting it.
 
 ### Run
 
@@ -110,7 +106,7 @@ Question bank entry format:
 ## Notes and limitations
 
 - Scanned (image-only) PDFs are not supported, because text is extracted directly from the file.
-- Questions in the generated bank are LLM-written, so review them for accuracy before relying on the reference answers.
+- The included question bank was generated with an LLM, so reference answers may contain errors. Review entries before relying on them, and consider adding questions from curated datasets.
 - AI grading is useful feedback, not an exact score.
 - There are no user accounts: the history page shows all attempts stored on that server.
 - On free Groq tiers you may hit rate limits. The app retries automatically and shows a message if the service stays busy.
