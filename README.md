@@ -13,10 +13,11 @@ Built with Python, Flask, Groq and ChromaDB using Retrieval-Augmented Generation
 - **Skill gap report:** strong, partial and missing skills compared to the job description, with a tip for each gap
 - **Progress tracking:** every quiz and attempt is saved in SQLite, with a history page
 - **PDF export:** the quiz with its answer key, or a full report with your answers, score and feedback
+- **Scanned PDF support (optional):** falls back to OCR when a resume has no selectable text
 
 ## How it works
 
-1. The resume (PDF or DOCX) is parsed to text and combined with the job description.
+1. The resume (PDF or DOCX) is parsed to text and combined with the job description. If a PDF has no selectable text, OCR is attempted (when installed).
 2. An LLM extracts the target role, the key skills to test, and the skill gap report.
 3. Each skill is searched in the ChromaDB question bank, filtered by role and difficulty.
 4. The retrieved questions are passed to the LLM, which writes the quiz.
@@ -54,6 +55,20 @@ The first run downloads a small embedding model (about 80 MB). Re-running `inges
 
 Optional: `python generate_bank.py` regenerates a starter bank with Groq (many API calls, a few minutes). It overwrites `data/question_bank.json` and `data/vocab.json`, so review the output before ingesting it.
 
+### Optional: OCR for scanned PDFs
+
+Text-based PDFs and DOCX files work without this step. To also support scanned (image-only) PDFs, install the Tesseract OCR engine. The Python packages (`pymupdf`, `pytesseract`, `pillow`) are already in `requirements.txt`, but they need the Tesseract program itself:
+
+- **Windows:** download the installer from [UB-Mannheim/tesseract](https://github.com/UB-Mannheim/tesseract/wiki) and run it. Either add the install folder (usually `C:\Program Files\Tesseract-OCR`) to your PATH, or point to it in `utils.py`:
+  ```python
+  pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+  ```
+- **macOS:** `brew install tesseract`
+- **Linux (Debian/Ubuntu):** `sudo apt install tesseract-ocr`
+- **Fedora:** `sudo dnf install tesseract`
+
+Check it works with `tesseract --version`. If OCR is not installed, the app still runs and shows the "couldn't read enough text" message for scanned PDFs. OCR reads only the first 3 pages.
+
 ### Run
 
 ```bash
@@ -67,7 +82,7 @@ Open http://127.0.0.1:5000.
 ```
 .
 ├── app.py              Flask routes and quiz flow
-├── utils.py            Resume parsing and all Groq calls (requirements, quiz, grading)
+├── utils.py            Resume parsing (with OCR fallback) and all Groq calls
 ├── retrieval.py        Question bank search
 ├── ingest.py           Loads data/question_bank.json into ChromaDB
 ├── generate_bank.py    Generates a starter question bank with Groq
@@ -105,7 +120,7 @@ Question bank entry format:
 
 ## Notes and limitations
 
-- Scanned (image-only) PDFs are not supported, because text is extracted directly from the file.
+- Scanned (image-only) PDFs need the optional OCR setup above. Without Tesseract installed they are rejected. OCR is slower and less accurate than direct text extraction, and only the first 3 pages are read.
 - The included question bank was generated with an LLM, so reference answers may contain errors. Review entries before relying on them, and consider adding questions from curated datasets.
 - AI grading is useful feedback, not an exact score.
 - There are no user accounts: the history page shows all attempts stored on that server.

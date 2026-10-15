@@ -5,3 +5,9 @@ pypdf
 python-docx
 python-dotenv
 reportlab
+
+# Optional: OCR for scanned (image-only) PDFs.
+# Also needs the Tesseract binary installed separately (see README).
+pymupdf
+pytesseract
+pillow
