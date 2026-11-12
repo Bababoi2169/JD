@@ -1,47 +1,54 @@
 import uuid
 from flask import Flask, render_template, request, redirect, url_for, send_file
+from groq import RateLimitError
 from utils import extract_text, generate_quiz, extract_requirements, evaluate_answers
 from retrieval import get_relevant_questions
 from db import init_db, save_quiz, get_quiz, save_attempt, get_attempt, list_history
 from pdf_export import make_pdf
-from groq import RateLimitError
 
 app = Flask(__name__)
-init_db()
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB
+init_db()
 
-def build_quiz(resume_text, jd_text, req, mode):
+
+def build_quiz(resume_text, jd_text, req, mode, per_level):
     bank = []
     for level in ["easy", "medium", "hard"]:
-        bank += get_relevant_questions(req["queries"], req.get("role"), difficulty=level, max_total=4)
-    return generate_quiz(resume_text, jd_text, bank, n=15, mode=mode)
+        bank += get_relevant_questions(req["queries"], req.get("role"), difficulty=level, max_total=per_level)
+    return generate_quiz(resume_text, jd_text, bank, per_level=per_level, mode=mode)
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
+        jd_text = request.form.get("jd", "").strip()
         try:
             resume_file = request.files.get("resume")
             if not resume_file or not resume_file.filename:
                 raise ValueError("Please upload a resume.")
-            jd_text = request.form.get("jd", "").strip()
             if len(jd_text) < 50:
                 raise ValueError("Please paste a longer job description.")
 
             resume_text = extract_text(resume_file)
             req = extract_requirements(resume_text, jd_text)
             mode = request.form.get("mode", "text")
-            questions = build_quiz(resume_text, jd_text, req, mode)
+            per_level = int(request.form.get("per_level", 5))
+            if per_level not in (3, 5, 7):
+                per_level = 5
+            questions = build_quiz(resume_text, jd_text, req, mode, per_level)
+
             quiz_id = str(uuid.uuid4())
             save_quiz(quiz_id, mode, req.get("role"), questions, req["gap"])
             return redirect(url_for("quiz", quiz_id=quiz_id))
-
-        except (ValueError, RuntimeError) as e:
-            return render_template("index.html", error=str(e))
         except RateLimitError:
-            return render_template("index.html", error="The AI service is busy. Wait a minute and try again.", jd=request.form.get("jd", ""))
+            return render_template("index.html", jd=jd_text,
+                                   error="The AI service is busy. Wait a minute and try again.")
+        except (ValueError, RuntimeError) as e:
+            return render_template("index.html", error=str(e), jd=jd_text)
         except Exception:
             app.logger.exception("Quiz generation failed")
-            return render_template("index.html", error="Something went wrong. Please try again.")
+            return render_template("index.html", jd=jd_text,
+                                   error="Something went wrong. Please try again.")
     return render_template("index.html")
 
 

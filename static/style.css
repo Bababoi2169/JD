@@ -24,3 +24,4 @@ textarea.answer { min-height:100px; margin-bottom:8px; }
 .part { color:#d97706; font-weight:600; }
 .bar { background:#e5e7eb; border-radius:999px; height:10px; margin:8px 0; overflow:hidden; }
 .bar > div { background:var(--accent); height:100%; }
+select { width:100%; padding:10px; border:1px solid var(--border); border-radius:8px; font:inherit; margin:6px 0 16px; background:#fff; color:var(--text); }

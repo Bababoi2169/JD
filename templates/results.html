@@ -16,8 +16,8 @@
 {% for r in results %}
 <div class="card">
   <h3>{{ loop.index }}. {{ r.question }}</h3>
-  <p>Your answer: {{ r.options[r.picked] }}
-     <span class="{{ 'ok' if r.correct else 'no' }}">{{ "✓" if r.correct else "✗" }}</span></p>
+  <p>Your answer: {% if r.picked >= 0 %}{{ r.options[r.picked] }}{% else %}<i>(not answered)</i>{% endif %}
+    <span class="{{ 'ok' if r.correct else 'no' }}">{{ "✓" if r.correct else "✗" }}</span></p>
   {% if not r.correct %}<p>Correct: <b>{{ r.options[r.correct_index] }}</b></p>{% endif %}
   <p>{{ r.explanation }}</p>
   <span class="meta">Targets: {{ r.tied_to }}{% if r.source_id %} · Bank: {{ r.source_id }}{% endif %}</span>

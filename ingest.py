@@ -20,6 +20,8 @@ def main(path):
             skipped.append((e["id"], f"unknown topic {e['topic']}"))
         elif e["difficulty"] not in vocab["difficulties"]:
             skipped.append((e["id"], f"unknown difficulty {e['difficulty']}"))
+        elif e.get("status") in ("rejected", "flagged"):
+            skipped.append((e["id"], f"status {e['status']}"))
         else:
             ids.append(e["id"])
             docs.append(f"{e['topic']}: {e['question']}")
@@ -28,6 +30,8 @@ def main(path):
                 "difficulty": e["difficulty"],
                 "reference_answer": e["reference_answer"],
                 "tags": ",".join(e.get("tags", [])),
+                "source": e.get("source", "unknown"),
+                "status": e.get("status", "unverified"),
             })
 
     client = chromadb.PersistentClient(path=CHROMA_PATH)

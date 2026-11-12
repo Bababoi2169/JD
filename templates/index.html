@@ -1,26 +1,43 @@
 <!doctype html>
 <html lang="en"><head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Interview Quiz</title>
+  <title>PrepMate</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head><body><div class="container">
-<h1>Interview Quiz Generator</h1>
+
+<h1>PrepMate</h1>
+<p class="meta">Personalized interview practice from your resume and a job description.</p>
+
 {% if error %}<div class="error">{{ error }}</div>{% endif %}
+
 <form method="POST" enctype="multipart/form-data" class="card" id="gen-form">
   <label class="field">Resume (PDF or DOCX)</label>
   <input type="file" name="resume" accept=".pdf,.docx" required>
+
   <label class="field">Job description</label>
   <textarea name="jd" placeholder="Paste the job description" required>{{ jd or "" }}</textarea>
+
   <label class="field">Answer style</label>
   <label class="option"><input type="radio" name="mode" value="text" checked> Type your answers (AI-graded)</label>
   <label class="option"><input type="radio" name="mode" value="mcq"> Multiple choice</label>
+  <br>
+  <label class="field">Questions per level (easy, medium, hard)</label>
+  <select name="per_level">
+    <option value="3">3 per level (9 total)</option>
+    <option value="5" selected>5 per level (15 total)</option>
+    <option value="7">7 per level (21 total)</option>
+  </select>
+  <br>
   <button type="submit" id="gen-btn">Generate quiz</button>
 </form>
+
 <a href="{{ url_for('history') }}">Past quizzes</a>
+
 <script>
   document.getElementById("gen-form").addEventListener("submit", () => {
     const b = document.getElementById("gen-btn");
-    b.disabled = true; b.textContent = "Generating... (10-20s)";
+    b.disabled = true; b.textContent = "Generating... (~20s)";
   });
 </script>
+
 </div></body></html>

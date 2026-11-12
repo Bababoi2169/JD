@@ -25,6 +25,12 @@
       <span class="meta">{{ q.topic }} · {{ q.difficulty }}</span>
     </div>
   {% endfor %}
-  <button type="submit">Submit</button>
+<button type="submit" id="submit-btn">Submit</button>
+<script>
+  document.getElementById("quiz-form").addEventListener("submit", () => {
+    const b = document.getElementById("submit-btn");
+    b.disabled = true; b.textContent = "Grading... (10-20s)";
+  });
+</script>
 </form>
 </div></body></html>
